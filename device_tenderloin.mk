@@ -90,7 +90,7 @@ PRODUCT_PACKAGES += \
 
 # QCOM OMX Video Encoding
 PRODUCT_PACKAGES += \
-	libOmxVenc
+    libOmxVenc
 
 # QCOM OMX Video Tests
 #PRODUCT_PACKAGES += \
@@ -158,19 +158,26 @@ PRODUCT_PACKAGES += \
     rebootcmd \
     TenderloinParts
 
-# MBM
+# Sierra
 PRODUCT_PACKAGES += \
+    SierraDMLog \
+    libswigpsat \
+    libswims \
+    libsierraat-ril \
+    swisdk \
+    swifwdnld \
     gps.tenderloin \
-    MbmService \
-    libmbm-ril \
     Mms
 
 PRODUCT_COPY_FILES += \
-   device/hp/tenderloin/xmesg:system/bin/xmesg \
-   device/hp/tenderloin/pollerr.sh:system/bin/pollerr.sh \
-   device/hp/tenderloin/aldtf.sh:system/xbin/aldtf.sh \
-   device/hp/tenderloin/gps.conf:system/etc/gps.conf \
-   device/hp/tenderloin/apns-conf.xml:system/etc/apns-conf.xml
+    hardware/sierra/prebuilt/system/bin/init.dhcpcd:system/bin/init.dhcpcd
+
+PRODUCT_COPY_FILES += \
+    device/hp/tenderloin/aldtf.sh:system/xbin/aldtf.sh \
+    device/hp/tenderloin/xmesg:system/bin/xmesg \
+    device/hp/tenderloin/pollerr.sh:system/bin/pollerr.sh \
+    device/hp/tenderloin/gps.conf:system/etc/gps.conf \
+    device/hp/tenderloin/apns-conf.xml:system/etc/apns-conf.xml
 
 # Keylayouts
 PRODUCT_COPY_FILES += \

@@ -1,7 +1,7 @@
 # inherit from the proprietary version
 -include vendor/hp/tenderloin/BoardConfigVendor.mk
 
-TARGET_SPECIFIC_HEADER_PATH := device/hp/tenderloin/include 
+TARGET_SPECIFIC_HEADER_PATH := device/hp/tenderloin/include
 
 # We have so much memory 3:1 split is detrimental to us.
 TARGET_USES_2G_VM_SPLIT := true
@@ -20,8 +20,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
-# MBM support
-BOARD_USES_MBM_GPS := true
+# Sierra support
 BOARD_GPS_LIBRARIES := gps.$(TARGET_BOOTLOADER_BOARD_NAME)
 USE_QEMU_GPS_HARDWARE := false
 

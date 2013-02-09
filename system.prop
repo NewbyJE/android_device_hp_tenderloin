@@ -36,8 +36,11 @@ net.bt.name=Android
 
 persist.service.adb.enable=1
 
-# MBM ril
-mobiledata.interfaces=rmnet0
-rild.libpath=/system/lib/libmbm-ril.so
-rild.libargs=-d /dev/ttyACM1 -i rmnet0
-
+# Sierra ril
+ro.sierra.dump=0
+ro.sierra.setup=0
+ro.sierra.voice=0
+ro.sierra.gpssel=1
+mobiledata.interfaces=wwan0
+rild.libpath=/system/lib/libsierraat-ril.so
+rild.libargs=-a -i wwan0
