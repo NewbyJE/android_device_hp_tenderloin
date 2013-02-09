@@ -38,8 +38,8 @@ persist.service.adb.enable=1
 persist.sys.usb.config=mtp,adb
 
 # Sierra ril
-ro.sierra.dump = 0
-ro.sierra.setup = 0
+ro.sierra.dump=0
+ro.sierra.setup=0
 ro.sierra.voice=0
 ro.sierra.gpssel=1
 ro.sierra.nmea=01FF
