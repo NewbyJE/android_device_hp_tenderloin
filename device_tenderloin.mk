@@ -170,12 +170,19 @@ PRODUCT_PACKAGES += \
     rebootcmd \
     TenderloinParts
 
-# MBM
+# Sierra
 PRODUCT_PACKAGES += \
+    SierraDMLog \
+    libswigpsat \
+    libswims \
+    libsierraat-ril \
+    swisdk \
+    swifwdnld \
     gps.tenderloin \
-    MbmService \
-    libmbm-ril \
     Mms
+
+PRODUCT_COPY_FILES += \
+   hardware/sierra/prebuilt/system/bin/init.dhcpcd:system/bin/init.dhcpcd
 
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/aldtf.sh:system/xbin/aldtf.sh \
