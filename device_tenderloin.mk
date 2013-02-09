@@ -114,7 +114,6 @@ PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/audio/lib/libaudio.so:system/lib/libaudio.so \
     device/hp/tenderloin/prebuilt/audio/lib/libaudiopolicy.so:system/lib/libaudiopolicy.so \
     device/hp/tenderloin/prebuilt/audio/lib/libbinder.so:system/lib/libbinder.so \
-    device/hp/tenderloin/prebuilt/audio/lib/libc2d2_z180.so:system/lib/lib/libc2d2_z180.so \
     device/hp/tenderloin/prebuilt/audio/lib/libjackpal-androidterm4.so:system/lib/liblibjackpal-androidterm4.so \
     device/hp/tenderloin/prebuilt/audio/lib/libjpeg.so:system/lib/libjpeg.so \
     device/hp/tenderloin/prebuilt/audio/lib/libtinyalsa.so:system/lib/libtinyalsa.so \
@@ -215,11 +214,6 @@ PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/modules/nfs.ko:system/lib/modules/nfs.ko \
     device/hp/tenderloin/prebuilt/modules/oprofile.ko:system/lib/modules/oprofile.ko \
     device/hp/tenderloin/prebuilt/modules/sunrpc.ko:system/lib/modules/sunrpc.ko
-
-# egl Modules (does not include proprietery)
-PRODUCT_COPY_FILES += \
-    device/hp/tenderloin/prebuilt/egl/egl.cfg:system/lib/egl/egl.cfg \
-    device/hp/tenderloin/prebuilt/egl/libGLESv2S3D_adreno200.so:system/lib/egl/libGLESv2S3D_adreno200.so
 
 # Wifi Modules
 PRODUCT_COPY_FILES += \
