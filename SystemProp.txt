@@ -1,0 +1,60 @@
+CyanogenMod CM9 (ICS)/CM10(JB)for the HP TouchPad 4G with Sierra MC7700
+================================================================================
+System Properties (defined in /system/build.prop)
+================================================================================
+ro.sierra.dump = 0 (default)
+--------------------------------------------------------------------------------
+  = 0: Do not dump data on the current firmware values to the radio log.
+  = 1: Write extended information on the MC7700 firmware settings to the
+       radio log when the MC7700 is first initialized (on system boot).
+
+--------------------------------------------------------------------------------
+ro.sierra.setup = 0 (default)
+--------------------------------------------------------------------------------
+  = 0: Do not write new settings to the MC7700 module when CM10 is booted.  
+  = 1: Write new values to the MC7700 module when the system is next booted.  
+  
+Note: The values written include default parameters included in the Sierra 
+      HAL and the following user selected values.  No values are written to
+      the MC7700 module if ro.sierra.setup = 0.
+
+--------------------------------------------------------------------------------
+ro.sierra.voice
+--------------------------------------------------------------------------------
+  = 0: Disable voice-related CnS objects in the Sierra HAL
+  = 1: Enable voice-related CnS and AT objects in the Sierra HAL 
+
+Note: If the setting is changed, the change is written to the MC7700 module
+      when the system is next booted.  Implementation requires another boot.
+
+--------------------------------------------------------------------------------
+ro.sierra.gpssel = 1 (default)
+--------------------------------------------------------------------------------
+  = 0: GPS will use GPS antenna connection on the MC7700 module.
+  = 1: GPS will use the AUX (GPS/Rx diversity)antenna on the MC7700 module.
+  
+Note: This setting is effective immediately after the system is booted.
+
+--------------------------------------------------------------------------------
+ro.sierra.nmea = 01FF (default)
+--------------------------------------------------------------------------------
+  = 01FF: All supported GPS NMEA sentences are output except for PSTIS.  
+  = 001F: Only GPS satellite NMEA sentences are output (no GLONASS)
+
+Note: The following specific NMEA sentences can be configured.
+
+      Bit 0: GPGGA (Fix information)
+      Bit 1: GPRMC (Recommended minimum data for GPS)
+      Bit 2: GPGSV (Detailed satellite data)
+      Bit 3: GPGSA (Overall satellite data)
+      Bit 4: GPVTG (Vector track and speed over the ground)
+      Bit 5: PQXFI (Proprietary Qualcomm eXtended Fix Information)*
+      Bit 6: GLGSV (GLONASS GSV)
+      Bit 7: GNGSA (GLONASS GSA)
+      Bit 8: GNGNS (Time, position, and fixed data for GLONASS receiver)*
+      Bit 13: PSTIS (GPS session start indication)*
+
+      * PQXFI, GNGNS, and PSTIS are currently ignored by the Sierra HAL.
+
+Note: This setting is effective immediately after the system is booted.
+
