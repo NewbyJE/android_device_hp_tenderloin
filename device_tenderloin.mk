@@ -169,7 +169,6 @@ PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/sierra/bin/swifwdnld:system/bin/swifwdnld \
     device/hp/tenderloin/prebuilt/sierra/bin/swisdk:system/bin/swisdk \
     device/hp/tenderloin/prebuilt/sierra/lib/libsierraat-ril.so:system/lib/libsierraat-ril.so \
-    device/hp/tenderloin/prebuilt/sierra/lib/libswigpsqmi.so:system/lib/libswigpsqmi.so \
     device/hp/tenderloin/prebuilt/sierra/lib/libswims.so:system/lib/libswims.so \
     device/hp/tenderloin/prebuilt/sierra/lib/libswisdkapi.so:system/lib/\
     device/hp/tenderloin/prebuilt/sierra/lib/hw/gps.tenderloin.so:system/lib/hw/gps.tenderloin.so 
