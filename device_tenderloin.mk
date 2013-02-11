@@ -181,8 +181,8 @@ PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/sierra/bin/swisdk:system/bin/swisdk \
     device/hp/tenderloin/prebuilt/sierra/lib/libsierraat-ril.so:system/lib/libsierraat-ril.so \
     device/hp/tenderloin/prebuilt/sierra/lib/libswims.so:system/lib/libswims.so \
-    device/hp/tenderloin/prebuilt/sierra/lib/libswisdkapi.so:system/lib/\
-    device/hp/tenderloin/prebuilt/sierra/lib/hw/gps.tenderloin.so:system/lib/hw/gps.tenderloin.so 
+    device/hp/tenderloin/prebuilt/sierra/lib/libswisdkapi.so:system/lib/libswisdkapi.so \
+    device/hp/tenderloin/prebuilt/sierra/lib/hw/gps.tenderloin.so:system/lib/hw/gps.tenderloin.so
 
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/aldtf.sh:system/xbin/aldtf.sh \
