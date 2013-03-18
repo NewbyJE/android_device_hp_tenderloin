@@ -22,7 +22,7 @@
                          AudioDecoderCap)>
 <!ELEMENT CamcorderProfiles (EncoderProfile+, ImageEncoding+, ImageDecoding, Camera)>
 <!ELEMENT EncoderProfile (Video, Audio)>
-<!ATTLIST EncoderProfile quality (480p|low) #REQUIRED>
+<!ATTLIST EncoderProfile quality (480p|high|low) #REQUIRED>
 <!ATTLIST EncoderProfile fileFormat (mp4|3gp) #REQUIRED>
 <!ATTLIST EncoderProfile duration (30|60) #REQUIRED>
 <!ELEMENT Video EMPTY>
@@ -89,6 +89,19 @@
             <Audio codec="amrnb"
                    bitRate="96000"
                    sampleRate="16000"
+                   channels="1" />
+        </EncoderProfile>
+
+        <EncoderProfile quality="high" fileFormat="mp4" duration="60">
+            <Video codec="h264"
+                   bitRate="3000000"
+                   width="640"
+                   height="480"
+                   frameRate="31" />
+
+            <Audio codec="aac"
+                   bitRate="96000"
+                   sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
 

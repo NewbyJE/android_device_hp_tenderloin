@@ -46,8 +46,13 @@ on init
 
 on post-fs
     # camera calibration
-    mkdir /data/misc/camera 0770 media media
+    mkdir /data/misc/camera 0770 media system
     mkdir /data/misc/camera/R5_MVEN003_LD2_ND0_IR0_SH0_FL1_SVEN003_DCCID1044 0770 media media
+
+    # camera config
+    exec /system/bin/touch /data/misc/camera/config.txt
+    chown media system /data/misc/camera/config.txt
+    chmod 660 /data/misc/camera/config.txt
 
     setprop vold.post_fs_data_done 1
 
@@ -119,22 +124,14 @@ on boot
     write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
 
-    # allow libaudio to change idle collapse on open/close
-    #chown audio audio /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled
-    #chmod 0660 /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled
-    #chown audio audio /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/idle_enabled
-    #chmod 0660 /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/idle_enabled
-    #chown audio audio /sys/module/pm_8x60/modes/cpu1/power_collapse/idle_enabled
-    #chmod 0660 /sys/module/pm_8x60/modes/cpu1/power_collapse/idle_enabled
-    #chown audio audio /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled
-    #chmod 0660 /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled
-
     # Enable power collapse where always safe
     write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/suspend_enabled 1
-    #write /sys/module/pm_8x60/modes/cpu1/power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu1/power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
-    #write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/suspend_enabled 1
     write /sys/module/rpm_resources/enable_low_power/vdd_dig 2
     write /sys/module/rpm_resources/enable_low_power/vdd_mem 2
