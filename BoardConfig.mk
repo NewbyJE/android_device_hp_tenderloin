@@ -20,10 +20,6 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
-# MBM support
-BOARD_USES_MBM_GPS := true
-BOARD_GPS_LIBRARIES := gps.$(TARGET_BOOTLOADER_BOARD_NAME)
-USE_QEMU_GPS_HARDWARE := false
 
 TARGET_DISABLE_ARM_PIE := true
 TARGET_NO_RADIOIMAGE := true
@@ -53,8 +49,8 @@ WIFI_DRIVER_MODULE_NAME     := "ath6kl"
 BOARD_USES_AUDIO_LEGACY := false
 BOARD_USES_GENERIC_AUDIO := false
 TARGET_PROVIDES_LIBAUDIO := false
-BOARD_USES_ALSA_AUDIO := true
-BOARD_WITH_ALSA_UTILS := true
+BOARD_USES_ALSA_AUDIO := false
+BOARD_WITH_ALSA_UTILS := false
 
 #Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -113,7 +109,7 @@ BOARD_USES_CUSTOM_FSCK_MSDOS := true
 BOARD_NO_EXT4_LAZYINIT := true
 
 # Define kernel config for inline building
-TARGET_KERNEL_CONFIG := tenderloin4g_android_defconfig
+TARGET_KERNEL_CONFIG := tenderloin_android_defconfig
 
 # Define Prebuilt kernel locations
 TARGET_PREBUILT_KERNEL := device/hp/tenderloin/prebuilt/boot/kernel

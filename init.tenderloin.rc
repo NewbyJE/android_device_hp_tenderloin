@@ -224,33 +224,3 @@ service serial /sbin/serial
 on property:init.svc.bootanim=stopped
     start thermald
     start mpdecision
-
-# MBM
-on init
-
-# Enable USB auto suspend for MBM devices
-    write /sys/bus/usb/devices/1-1/power/autosuspend 2
-    write /sys/bus/usb/devices/1-1/power/control auto
-    write /sys/bus/usb/devices/1-1/power/wakeup enabled
-    chown radio radio /dev/cdc-wdm0
-    chmod 0660 /dev/cdc-wdm0
-    chown radio radio /dev/cdc-wdm1
-    chmod 0660 /dev/cdc-wdm1
-
-# Set NITZ Feature on or off
-    setprop mbm.ril.config.nitz no
-# Set Loglevel for MBM GPS
-    setprop mbm.gps.config.loglevel INFO
-# Set the device for controlling the gps
-    setprop mbm.gps.config.gps_ctrl /dev/cdc-wdm0
-# Set the device for nmea data
-    setprop mbm.gps.config.gps_nmea /dev/ttyACM2
-# Set the desired mode (PGPS,SUPL or STANDALONE
-    setprop mbm.gps.config.gps_pref_mode PGPS
-
-# The following settings are only used for SUPL
-# Enable network initiated requests
-    setprop mbm.gps.config.supl.enable_ni yes
-# Allow connecting to supl servers without certificates
-    setprop mbm.gps.config.supl.uncert yes
-

@@ -38,11 +38,3 @@
 
 # Bluetooth
 /dev/ttyHS0             0600    bluetooth   bluetooth
-
-# MBM devices
-/dev/ttyACM0            0660    radio       radio
-/dev/ttyACM1            0660    radio       radio
-/dev/ttyACM2            0660    system      system
-/dev/cdc-wdm0           0660    system      system
-/dev/cdc-wdm1           0660    system      system
-

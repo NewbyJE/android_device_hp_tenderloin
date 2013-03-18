@@ -125,6 +125,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librs_jni \
     wpa_supplicant.conf \
+    libmllite \
+    libmlplatform \
     sensors.tenderloin \
     lights.tenderloin \
     ts_srv \
@@ -135,20 +137,6 @@ PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     rebootcmd \
     TenderloinParts
-
-# MBM
-PRODUCT_PACKAGES += \
-    gps.tenderloin \
-    MbmService \
-    libmbm-ril \
-    Mms
-
-PRODUCT_COPY_FILES += \
-    device/hp/tenderloin/aldtf.sh:system/xbin/aldtf.sh \
-    device/hp/tenderloin/xmesg:system/bin/xmesg \
-    device/hp/tenderloin/pollerr.sh:system/bin/pollerr.sh \
-    device/hp/tenderloin/gps.conf:system/etc/gps.conf \
-    device/hp/tenderloin/apns-conf.xml:system/etc/apns-conf.xml
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -234,4 +222,4 @@ PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/boot/moboot.splash.CyanogenMod.tga:moboot.splash.CyanogenMod.tga
 
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
-$(call inherit-product, build/target/product/full_base_telephony.mk)
+$(call inherit-product, build/target/product/full_base.mk)
