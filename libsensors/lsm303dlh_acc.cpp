@@ -102,12 +102,10 @@ int Lsm303dlhGSensor::setDelay(int32_t handle, int64_t ns)
             err = -errno;
         }
 
-		close(fd);
-
         ALOGE_IF(err < 0,
                 "Error setting delay of LSM303DLH accelerometer (%s)",
                 strerror(-err));
-    } 
+    }
     return err;
 }
 

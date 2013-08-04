@@ -65,7 +65,7 @@ int Lsm303dlhMagSensor::enable(int32_t handle, int en)
         int bytes = sprintf(buffer, "%u\n", newState);
         err = write(fd, buffer, bytes);
         err = err < 0 ? -errno : 0;
-       close(fd);
+        close(fd);
     } else {
         err = -errno;
     }
