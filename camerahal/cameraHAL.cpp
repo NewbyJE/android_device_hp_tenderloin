@@ -104,7 +104,6 @@ typedef struct priv_camera_device {
     int rotation;
 } priv_camera_device_t;
 
-
 static struct {
     int type;
     const char *text;
