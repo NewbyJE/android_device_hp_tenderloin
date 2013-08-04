@@ -390,8 +390,8 @@ void MPLSensor::gyroHandler(sensors_event_t* s, uint32_t* pending_mask,
     VFUNC_ALOG;
     inv_error_t res;
     res = inv_get_float_array(INV_GYROS, s->gyro.v);
-    s->gyro.v[0] = s->gyro.v[0] * M_PI / 180.0;
-    s->gyro.v[1] = s->gyro.v[1] * M_PI / 180.0;
+    s->gyro.v[0] = s->gyro.v[1] * -M_PI / 180.0;
+    s->gyro.v[1] = s->gyro.v[0] * M_PI / 180.0;
     s->gyro.v[2] = s->gyro.v[2] * M_PI / 180.0;
     s->gyro.status = mMpuAccuracy;
     if (res == INV_SUCCESS)
