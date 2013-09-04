@@ -64,6 +64,7 @@ int Lsm303dlhGSensor::enable(int32_t handle, int en)
         int bytes = sprintf(buffer, "%u\n", newState);
         err = write(fd, buffer, bytes);
         err = err < 0 ? -errno : 0;
+        close(fd);
     } else {
         err = -errno;
     }
@@ -96,15 +97,15 @@ int Lsm303dlhGSensor::setDelay(int32_t handle, int64_t ns)
             int bytes = sprintf(buffer, "%lu\n", delay);
             err = write(fd, buffer, bytes);
             err = err < 0 ? -errno : 0;
+            close(fd);
         } else {
             err = -errno;
         }
 
-		close(fd);
-
         LOGE_IF(err < 0,
                 "Error setting delay of LSM303DLH accelerometer (%s)",
-                strerror(-err)); } 
+                strerror(-err));
+    }
     return err;
 }
 
@@ -143,10 +144,10 @@ void Lsm303dlhGSensor::processEvent(int code, int value)
 {
     switch (code) {
         case EVENT_TYPE_ACCEL_X:
-            mPendingEvent.acceleration.x = value * CONVERT_A_X;
+            mPendingEvent.acceleration.y = value * CONVERT_A_X;
             break;
         case EVENT_TYPE_ACCEL_Y:
-            mPendingEvent.acceleration.y = value * CONVERT_A_Y;
+            mPendingEvent.acceleration.x = value * -CONVERT_A_Y;
             break;
         case EVENT_TYPE_ACCEL_Z:
             mPendingEvent.acceleration.z = value * CONVERT_A_Z;

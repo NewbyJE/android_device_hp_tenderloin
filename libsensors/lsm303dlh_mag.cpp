@@ -65,6 +65,7 @@ int Lsm303dlhMagSensor::enable(int32_t handle, int en)
         int bytes = sprintf(buffer, "%u\n", newState);
         err = write(fd, buffer, bytes);
         err = err < 0 ? -errno : 0;
+        close(fd);
     } else {
         err = -errno;
     }
@@ -88,7 +89,7 @@ int Lsm303dlhMagSensor::setDelay(int32_t handle, int64_t ns)
         if (ns < 0)
             return -EINVAL;
 
-        unsigned long delay = 34/*ns / 1000000*/; //nano to mili
+        unsigned long delay = ns / 1000000; //nano to mili
 
         // ok we need to set our enabled state
         int fd = open(LSM303DLH_MAG_DELAY_FILE, O_WRONLY);
@@ -97,6 +98,7 @@ int Lsm303dlhMagSensor::setDelay(int32_t handle, int64_t ns)
             int bytes = sprintf(buffer, "%lu\n", delay);
             err = write(fd, buffer, bytes);
             err = err < 0 ? -errno : 0;
+            close(fd);
         } else {
             err = -errno;
         }
@@ -142,10 +144,10 @@ void Lsm303dlhMagSensor::processEvent(int code, int value)
 {
     switch (code) {
         case EVENT_TYPE_MAGV_X:
-            mPendingEvent.magnetic.x = value * CONVERT_M_X;
+            mPendingEvent.magnetic.y = value * CONVERT_M_X;
             break;
         case EVENT_TYPE_MAGV_Y:
-            mPendingEvent.magnetic.y = value * CONVERT_M_Y;
+            mPendingEvent.magnetic.x = value * -CONVERT_M_Y;
             break;
         case EVENT_TYPE_MAGV_Z:
             mPendingEvent.magnetic.z = value * CONVERT_M_Z;
