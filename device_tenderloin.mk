@@ -33,6 +33,8 @@ PRODUCT_COPY_FILES += \
     device/hp/tenderloin/init.tenderloin.rc:root/init.tenderloin.rc \
     device/hp/tenderloin/ueventd.tenderloin.rc:root/ueventd.tenderloin.rc \
     device/hp/tenderloin/initlogo.rle:root/initlogo.rle \
+    device/hp/tenderloin/prebuilt/wifi/hostapd.conf:system/etc/wifi/hostapd.conf \
+    device/hp/tenderloin/prebuilt/wifi/udhcpd.conf:system/etc/wifi/udhcpd.conf \
     device/hp/tenderloin/prebuilt/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/hp/tenderloin/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
     device/hp/tenderloin/HPTouchpad.idc:system/usr/idc/HPTouchpad.idc
@@ -58,6 +60,7 @@ PRODUCT_COPY_FILES += \
      frameworks/native/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
      frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
      frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
      frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
      frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
      frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
@@ -156,6 +159,8 @@ PRODUCT_PACKAGES += \
 # Sensors, misc
 PRODUCT_PACKAGES += \
     librs_jni \
+    hostapd.conf \
+    udhcpd.conf \
     wpa_supplicant.conf \
     libmllite \
     libmlplatform \
