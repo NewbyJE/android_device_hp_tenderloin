@@ -102,18 +102,51 @@ PRODUCT_PACKAGES += \
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
-    audio.primary.tenderloin \
-    tinymix \
-    tinyplay \
-    tinycap
+    libaudioutils \
+    audio.primary.tenderloin
 
-# audio mixer paths
+# prebuilt audio libs
 PRODUCT_COPY_FILES += \
-    device/hp/tenderloin/configs/mixer_paths.xml:system/etc/mixer_paths.xml
+    device/hp/tenderloin/prebuilt/audio/lib/liba2dp.so:system/lib/liba2dp.so \
+    device/hp/tenderloin/prebuilt/audio/lib/libasound.so:system/lib/libasound.so \
+    device/hp/tenderloin/prebuilt/audio/lib/libaudio.so:system/lib/libaudio.so \
+    device/hp/tenderloin/prebuilt/audio/lib/libaudiopolicy.so:system/lib/libaudiopolicy.so \
+    device/hp/tenderloin/prebuilt/audio/lib/libbinder.so:system/lib/libbinder.so \
+    device/hp/tenderloin/prebuilt/audio/lib/libjackpal-androidterm4.so:system/lib/liblibjackpal-androidterm4.so \
+    device/hp/tenderloin/prebuilt/audio/lib/libjpeg.so:system/lib/libjpeg.so \
+    device/hp/tenderloin/prebuilt/audio/lib/libtinyalsa.so:system/lib/libtinyalsa.so \
+    device/hp/tenderloin/prebuilt/audio/lib/libwebcore.so:system/lib/libwebcore.so \
+    device/hp/tenderloin/prebuilt/audio/lib/hw/alsa.tenderloin.so:system/lib/hw/alsa.tenderloin.so \
+    device/hp/tenderloin/prebuilt/audio/lib/hw/audio.primary.tenderloin.so:system/lib/hw/audio.primary.tenderloin.so \
+    device/hp/tenderloin/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf \
+    device/hp/tenderloin/prebuilt/etc/mixer_paths.xml:system/etc/mixer_paths.xml \
+    device/hp/tenderloin/prebuilt/etc/NOTICE.html.gz:system/etc/NOTICE.html.gz
 
-# audio policy configuration
+# Prebuilt audio libs needed to compile other libs
 PRODUCT_COPY_FILES += \
-    device/hp/tenderloin/configs/audio_policy.conf:system/etc/audio_policy.conf
+    device/hp/tenderloin/prebuilt/audio/lib/liba2dp.so:obj/lib/liba2dp.so \
+    device/hp/tenderloin/prebuilt/audio/lib/libaudio.so:obj/lib/libaudio.so \
+    device/hp/tenderloin/prebuilt/audio/lib/libaudiopolicy.so:obj/lib/libaudiopolicy.so
+
+# Prebuilt alsa configs
+PRODUCT_COPY_FILES += \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/alsa.conf:system/usr/share/alsa/alsa.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/cards/aliases.conf:system/usr/share/alsa/cards/aliases.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/center_lfe.conf:system/usr/share/alsa/pcm/center_lfe.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/default.conf:system/usr/share/alsa/pcm/default.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/dmix.conf:system/usr/share/alsa/pcm/dmix.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/dpl.conf:system/usr/share/alsa/pcm/dpl.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/dsnoop.conf:system/usr/share/alsa/pcm/dsnoop.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/front.conf:system/usr/share/alsa/pcm/front.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/iec958.conf:system/usr/share/alsa/pcm/iec958.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/modem.conf:system/usr/share/alsa/pcm/modem.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/rear.conf:system/usr/share/alsa/pcm/rear.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/side.conf:system/usr/share/alsa/pcm/side.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/surround40.conf:system/usr/share/alsa/pcm/surround40.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/surround41.conf:system/usr/share/alsa/pcm/surround41.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/surround50.conf:system/usr/share/alsa/pcm/surround50.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/surround51.conf:system/usr/share/alsa/pcm/surround51.conf \
+    device/hp/tenderloin/prebuilt/audio/usr/share/alsa/pcm/surround71.conf:system/usr/share/alsa/pcm/surround71.conf
 
 # Camera
 PRODUCT_PACKAGES += \
