@@ -125,6 +125,15 @@ BOARD_NO_EXT4_LAZYINIT := true
 # Define kernel config for inline building
 TARGET_KERNEL_CONFIG := tenderloin4g_android_defconfig
 
+KERNEL_WIFI_MODULES:
+	$(MAKE) -C external/backports-wireless defconfig-ath6kl
+	export CROSS_COMPILE=$(ARM_EABI_TOOLCHAIN)/arm-eabi-; $(MAKE) -C external/backports-wireless KLIB=$(KERNEL_SRC) KLIB_BUILD=$(KERNEL_OUT) ARCH=$(TARGET_ARCH) $(ARM_CROSS_COMPILE)
+	cp `find external/backports-wireless -name *.ko` $(KERNEL_MODULES_OUT)/
+	arm-eabi-strip --strip-debug `find $(KERNEL_MODULES_OUT) -name *.ko`
+	$(MAKE) -C external/backports-wireless clean
+
+TARGET_KERNEL_MODULES := KERNEL_WIFI_MODULES
+
 # Define Prebuilt kernel locations
 TARGET_PREBUILT_KERNEL := device/hp/tenderloin/prebuilt/boot/kernel
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/hp/tenderloin/recovery/recovery_ui.c
