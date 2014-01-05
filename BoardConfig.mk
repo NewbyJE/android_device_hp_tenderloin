@@ -52,10 +52,11 @@ WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/ath6kl.ko"
 # ATH6KL uses hostapd built from source
 BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_ath6kl
-# FW path parameters (should be ignored)
+# FW path parameters (todo: temp, should be ignored)
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_AP  := "ap"
 WIFI_DRIVER_FW_PATH_P2P := "p2p"
+WIFI_DRIVER_FW_PATH_PARAM := ""
 
 # Audio
 BOARD_USES_AUDIO_LEGACY := true
