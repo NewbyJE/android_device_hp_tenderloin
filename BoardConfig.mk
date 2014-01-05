@@ -41,12 +41,21 @@ TARGET_SCREEN_HEIGHT := 768
 TARGET_SCREEN_WIDTH := 1024
 
 # Wifi related defines
+BOARD_WLAN_DEVICE := ath6kl
+# ATH6KL uses NL80211 driver
+WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_ath6kl
-WPA_SUPPLICANT_VERSION      := VER_0_8_X
-BOARD_WLAN_DEVICE           := ath6kl
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/ath6kl.ko"
-WIFI_DRIVER_MODULE_NAME     := "ath6kl"
+# Station/client mode
+WIFI_DRIVER_MODULE_NAME := "ath6kl"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/ath6kl.ko"
+# ATH6KL uses hostapd built from source
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_ath6kl
+# FW path parameters (should be ignored)
+WIFI_DRIVER_FW_PATH_STA := "sta"
+WIFI_DRIVER_FW_PATH_AP  := "ap"
+WIFI_DRIVER_FW_PATH_P2P := "p2p"
 
 # Audio
 BOARD_USES_AUDIO_LEGACY := true
