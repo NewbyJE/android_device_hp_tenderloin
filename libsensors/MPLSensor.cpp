@@ -392,8 +392,8 @@ void MPLSensor::gyroHandler(sensors_event_t* s, uint32_t* pending_mask,
     float temp[3];
     ALOGV_IF(EXTRA_VERBOSE, "gyroHandler");
     res = inv_get_float_array(INV_GYROS, temp);
-    s->gyro.v[0] = temp[0] * M_PI / 180.0;
-    s->gyro.v[1] = temp[1] * M_PI / 180.0;
+    s->gyro.v[0] = temp[1] * -M_PI / 180.0;
+    s->gyro.v[1] = temp[0] * M_PI / 180.0;
     s->gyro.v[2] = temp[2] * M_PI / 180.0;
     s->gyro.status = mMpuAccuracy;
     if (res == INV_SUCCESS)
