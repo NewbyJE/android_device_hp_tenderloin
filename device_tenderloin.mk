@@ -161,6 +161,11 @@ PRODUCT_PACKAGES += \
     rebootcmd \
     TenderloinParts
 
+PRODUCT_COPY_FILES += \
+    device/hp/tenderloin/aldtf.sh:system/xbin/aldtf.sh \
+    device/hp/tenderloin/xmesg:system/bin/xmesg \
+    device/hp/tenderloin/pollerr.sh:system/bin/pollerr.sh \
+
 # Keylayouts
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/usr/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin \
