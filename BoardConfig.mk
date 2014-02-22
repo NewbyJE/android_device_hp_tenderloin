@@ -38,12 +38,14 @@ TARGET_SCREEN_HEIGHT := 768
 TARGET_SCREEN_WIDTH := 1024
 
 # Wifi related defines
+BOARD_WLAN_DEVICE := ath6kl
+# ATH6KL uses NL80211 driver
+WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_ath6kl
-WPA_SUPPLICANT_VERSION      := VER_0_8_X
-BOARD_WLAN_DEVICE           := ath6kl
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/ath6kl.ko"
-WIFI_DRIVER_MODULE_NAME     := "ath6kl"
+# BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_ath6kl
+# Station/client mode
+WIFI_DRIVER_MODULE_NAME := "ath6kl"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/ath6kl.ko"
 
 # Audio
 BOARD_USES_AUDIO_LEGACY := false
@@ -110,6 +112,15 @@ BOARD_NO_EXT4_LAZYINIT := true
 
 # Define kernel config for inline building
 TARGET_KERNEL_CONFIG := tenderloin_android_defconfig
+
+KERNEL_WIFI_MODULES:
+	$(MAKE) -C external/backports-wireless defconfig-ath6kl
+	export CROSS_COMPILE=$(ARM_EABI_TOOLCHAIN)/arm-eabi-; $(MAKE) -C external/backports-wireless KLIB=$(KERNEL_SRC) KLIB_BUILD=$(KERNEL_OUT) ARCH=$(TARGET_ARCH) $(ARM_CROSS_COMPILE)
+	cp `find external/backports-wireless -name *.ko` $(KERNEL_MODULES_OUT)/
+	arm-eabi-strip --strip-debug `find $(KERNEL_MODULES_OUT) -name *.ko`
+	$(MAKE) -C external/backports-wireless clean
+
+TARGET_KERNEL_MODULES := KERNEL_WIFI_MODULES
 
 # Define Prebuilt kernel locations
 TARGET_PREBUILT_KERNEL := device/hp/tenderloin/prebuilt/boot/kernel

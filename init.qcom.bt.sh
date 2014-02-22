@@ -50,8 +50,8 @@ kill_hciattach ()
 ## DO NOT REMOVE 'sleep 2' below
 sleep 2
 ## DO NOT REMOVE 'sleep 2' above
-
 log -p i -t $TAG "bcattach"
+
 /system/bin/bcattach
 
 # init does SIGTERM on ctl.stop for service
