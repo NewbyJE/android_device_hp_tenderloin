@@ -14,6 +14,13 @@ fi
 # get the minor device number for /dev/store/media
 MM=`/system/xbin/ls -lLn /dev/store/media | sed -r -e 's/ +/\t/g' | cut -f6`
 
+# check for valid minor device number
+if [[ "$MM" < 0 ]];
+then
+	echo "$0: Invalid media minor device number: ${MM}"
+	exit 1
+fi
+
 # get the existing vold.fstab SDCARD= value
 OSTR=`sed -rn -e 's/.*(SDCARD=.*)$/\1/p' /fstab.tenderloin`
 
