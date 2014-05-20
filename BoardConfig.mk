@@ -38,11 +38,15 @@ COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=59 -DQCOM_HARDWARE -DQCOM_NO_SECURE_PLAYB
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
 
 # Wifi related defines
-BOARD_WPA_SUPPLICANT_DRIVER      	:= NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB 	:= lib_driver_cmd_ath6kl
-WPA_SUPPLICANT_VERSION           	:= VER_0_8_X
-BOARD_WLAN_DEVICE                	:= ath6kl
-BOARD_NEEDS_WIFI_DELAY			:= true
+BOARD_WLAN_DEVICE := ath6kl
+BOARD_NEEDS_WIFI_DELAY := true
+# ATH6KL uses NL80211 driver
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_ath6kl
+# Station/client mode
+WIFI_DRIVER_MODULE_NAME := "ath6kl"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/ath6kl.ko"
 
 # Audio
 TARGET_QCOM_AUDIO_VARIANT := caf
@@ -53,6 +57,11 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_HCI := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/hp/tenderloin/bluetooth
 BLUETOOTH_HCIATTACH_USING_PROPERTY = true
+
+# MBM support
+BOARD_USES_MBM_GPS := true
+BOARD_GPS_LIBRARIES := gps.$(TARGET_BOOTLOADER_BOARD_NAME)
+USE_QEMU_GPS_HARDWARE := false
 
 # Needed for blobs
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
@@ -115,7 +124,7 @@ TARGET_PREBUILT_KERNEL := device/hp/tenderloin/prebuilt/boot/kernel
 
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/hp/tenderloin
-TARGET_KERNEL_CONFIG := cyanogenmod_tenderloin_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_tenderloin4g_defconfig
 
 TARGET_RECOVERY_INITRC := device/hp/tenderloin/recovery/init.rc
 BOARD_HAS_NO_SELECT_BUTTON := false
