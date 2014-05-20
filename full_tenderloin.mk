@@ -67,7 +67,7 @@ PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/usr/keylayout/Generic.kl:system/usr/keylayout/Generic.kl \
     device/hp/tenderloin/prebuilt/usr/keylayout/pmic8058_pwrkey.kl:system/usr/keylayout/pmic8058_pwrkey.kl
 
-+#Wifi Firmware from kernel.org
+#Wifi Firmware from kernel.org
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/wifi/ath6k/LICENSE.atheros_firmware:/system/etc/firmware/ath6k/LICENSE.atheros_firmware \
     device/hp/tenderloin/prebuilt/wifi/ath6k/AR6002/athwlan.bin.z77:/system/etc/firmware/ath6k/AR6002/athwlan.bin.z77 \
