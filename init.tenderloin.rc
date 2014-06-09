@@ -115,7 +115,7 @@ on boot
 
     # increase per-process file limit to prevent warning
     setrlimit 7 10000 10000
-    
+
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi system
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -154,12 +154,12 @@ on boot
 
     # Enable power collapse where always safe
     write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
+    #write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/idle_enabled 1
-    write /sys/module/pm_8x60/modes/cpu1/power_collapse/idle_enabled 1
+    #write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/idle_enabled 1
+    #write /sys/module/pm_8x60/modes/cpu1/power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled 1
+    #write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/suspend_enabled 1
     write /sys/module/rpm_resources/enable_low_power/vdd_dig 2
     write /sys/module/rpm_resources/enable_low_power/vdd_mem 2
@@ -185,7 +185,7 @@ service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emul
 service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
     class late_start
     disabled
- 
+
 service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
     class late_start
     disabled
@@ -229,7 +229,11 @@ service serial /sbin/serial
     oneshot
 
 on property:init.svc.bootanim=stopped
-    start mpdecision
+   # start mpdecision
+
+on post-fs-data
+    setprop vold.post_fs_data_done 1
+
 
 on property:sys.boot_completed=1
     write /sys/block/mmcblk0/queue/scheduler row
