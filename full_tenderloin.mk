@@ -30,6 +30,8 @@ PRODUCT_COPY_FILES += \
     device/hp/tenderloin/ueventd.tenderloin.rc:root/ueventd.tenderloin.rc
 
 PRODUCT_COPY_FILES += \
+    device/hp/tenderloin/prebuilt/wifi/hostapd.conf:system/etc/wifi/hostapd.conf \
+    device/hp/tenderloin/prebuilt/wifi/udhcpd.conf:system/etc/wifi/udhcpd.conf \
     device/hp/tenderloin/prebuilt/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/hp/tenderloin/fstab.tenderloin:root/fstab.tenderloin \
     device/hp/tenderloin/prebuilt/lvm/lvm.conf:root/lvm/lvm.conf \
