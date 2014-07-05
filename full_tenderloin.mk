@@ -22,29 +22,23 @@ $(call inherit-product-if-exists, vendor/hp/tenderloin/tenderloin-vendor.mk)
 # application settings that are stored in resourced.
 DEVICE_PACKAGE_OVERLAYS += device/hp/tenderloin/overlay
 
-# Custom init files
+# Custom init files.
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/init.tenderloin.rc:root/init.tenderloin.rc \
     device/hp/tenderloin/init.tenderloin.usb.rc:root/init.tenderloin.usb.rc \
-    device/hp/tenderloin/ueventd.tenderloin.rc:root/ueventd.tenderloin.rc
+    device/hp/tenderloin/ueventd.tenderloin.rc:root/ueventd.tenderloin.rc \
+    device/hp/tenderloin/initlogo.rle:root/initlogo.rle
 
-# Custom boot files
-PRODUCT_COPY_FILES += \
-    device/hp/tenderloin/prebuilt/boot/moboot.splash.CyanogenMod.tga:moboot.splash.CyanogenMod.tga \
-    device/hp/tenderloin/prebuilt/boot/moboot.default:moboot.default
-    device/hp/tenderloin/prebuilt/boot/initlogo.rle:root/initlogo.rle
 
-# File system files
-PRODUCT_COPY_FILES += \
-    device/hp/tenderloin/fstab.tenderloin:root/fstab.tenderloin \
-    device/hp/tenderloin/prebuilt/lvm/lvm.conf:root/lvm/lvm.conf \
-    device/hp/tenderloin/makemulti.sh:makemulti.sh
-
-# WiFi configuration files.
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/wifi/hostapd.conf:system/etc/wifi/hostapd.conf \
     device/hp/tenderloin/prebuilt/wifi/udhcpd.conf:system/etc/wifi/udhcpd.conf \
-    device/hp/tenderloin/prebuilt/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+    device/hp/tenderloin/prebuilt/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    device/hp/tenderloin/fstab.tenderloin:root/fstab.tenderloin \
+    device/hp/tenderloin/prebuilt/lvm/lvm.conf:root/lvm/lvm.conf \
+    device/hp/tenderloin/makemulti.sh:makemulti.sh \
+    device/hp/tenderloin/prebuilt/boot/moboot.splash.CyanogenMod.tga:moboot.splash.CyanogenMod.tga \
+    device/hp/tenderloin/prebuilt/boot/moboot.default:moboot.default
 
 # Add touchcreen configuration file
 PRODUCT_COPY_FILES += \
@@ -54,11 +48,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/moboot_control.sh:system/bin/moboot_control.sh
 
-# Media minor check boot script
+# media minor check boot script
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/etc/init.d/10check_media_minor:system/etc/init.d/10check_media_minor
 
-# Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
@@ -199,7 +192,6 @@ PRODUCT_PACKAGES += \
     libmbm-ril \
     Mms
 
-# MBM support files
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/aldtf.sh:system/xbin/aldtf.sh \
     device/hp/tenderloin/xmesg:system/bin/xmesg \
