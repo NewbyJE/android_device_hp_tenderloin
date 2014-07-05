@@ -1,7 +1,7 @@
 # inherit from the proprietary version
 -include vendor/hp/tenderloin/BoardConfigVendor.mk
 
-TARGET_SPECIFIC_HEADER_PATH := device/hp/tenderloin/include 
+TARGET_SPECIFIC_HEADER_PATH := device/hp/tenderloin/include
 
 # We have so much memory 3:1 split is detrimental to us.
 TARGET_USES_2G_VM_SPLIT := true
@@ -30,6 +30,10 @@ TARGET_NO_RADIOIMAGE := true
 TARGET_HAVE_TSLIB := false
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
+TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
+TARGET_USE_SCORPION_PLD_SET := true
+TARGET_SCORPION_BIONIC_PLDOFFS := 6
+TARGET_SCORPION_BIONIC_PLDSIZE := 128
 
 TARGET_RECOVERY_FSTAB := device/hp/tenderloin/fstab.tenderloin
 RECOVERY_FSTAB_VERSION := 2
@@ -82,12 +86,17 @@ TARGET_POWERHAL_VARIANT := cm
 
 # QCOM HAL
 BOARD_USES_QCOM_HARDWARE := true
+TARGET_QCOM_DISPLAY_VARIANT := caf
+TARGET_QCOM_MEDIA_VARIANT := caf
 
 # QCOM enhanced A/V
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
 # Webkit workaround
 TARGET_FORCE_CPU_UPLOAD := true
+
+# Enable WEBGL in WebKit
+ENABLE_WEBGL := true
 
 BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_LIBRPC := true
@@ -96,13 +105,6 @@ BOARD_CAMERA_USE_GETBUFFERINFO := true
 BOARD_FIRST_CAMERA_FRONT_FACING := true
 BOARD_CAMERA_USE_ENCODEDATA := true
 BOARD_NEEDS_MEMORYHEAPPMEM := true
-
-# QCOM hardware
-BOARD_USES_QCOM_HARDWARE := true
-TARGET_QCOM_DISPLAY_VARIANT := caf
-TARGET_QCOM_MEDIA_VARIANT := caf
-BOARD_USES_QCOM_GPS := true
-BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
 BOARD_OVERLAY_FORMAT_YCbCr_420_SP := true
 USE_CAMERA_STUB := false
