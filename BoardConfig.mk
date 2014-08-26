@@ -26,12 +26,18 @@ TARGET_SCREEN_HEIGHT := 768
 TARGET_SCREEN_WIDTH := 1024
 
 # Wifi related defines
+BOARD_WLAN_DEVICE := ath6kl
+BOARD_NEEDS_WIFI_DELAY := true
+WIFI_DRIVER_LOADER_DELAY    := 1000000
+# ATH6KL uses NL80211 driver
+WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_ath6kl
-WPA_SUPPLICANT_VERSION      := VER_0_8_X
-BOARD_WLAN_DEVICE           := ath6kl
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/ath6kl.ko"
 WIFI_DRIVER_MODULE_NAME     := "ath6kl"
+# ATH6KL uses hostapd built from source
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_ath6kl
 
 # Audio
 BOARD_USES_LEGACY_ALSA_AUDIO := true
@@ -44,18 +50,30 @@ BOARD_HAVE_BLUETOOTH_HCI := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/hp/tenderloin/bluetooth
 BLUETOOTH_HCIATTACH_USING_PROPERTY = true
 
+# MBM support
+BOARD_USES_MBM_RIL := true
+BOARD_USES_MBM_GPS := true
+BOARD_GPS_LIBRARIES := gps.$(TARGET_BOOTLOADER_BOARD_NAME)
+USE_QEMU_GPS_HARDWARE := false
+# MBM RIL does not currently support CELL_INFO_LIST commands
+RIL_NO_CELL_INFO_LIST := true
+
 # Define egl.cfg location
 BOARD_EGL_CFG := device/hp/tenderloin/configs/egl.cfg
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_QCOM_AUDIO_VARIANT := caf
+TARGET_USES_QCOM_BSP := true
+TARGET_QCOM_MEDIA_VARIANT := caf
 TARGET_QCOM_DISPLAY_VARIANT := caf
 
 # QCOM HAL
 USE_OPENGL_RENDERER := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
+
+# enable three buffers at all times
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # Use legacy MM heap behavior
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
@@ -90,6 +108,14 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/hp/tenderloin/releasetools/t
 # Define kernel config for inline building
 TARGET_KERNEL_CONFIG := cyanogenmod_tenderloin_defconfig
 TARGET_KERNEL_SOURCE := kernel/hp/tenderloin
+KERNEL_WIFI_MODULES:
+	$(MAKE) -C external/backports-wireless defconfig-ath6kl
+	export CROSS_COMPILE=$(ARM_EABI_TOOLCHAIN)/arm-eabi-; $(MAKE) -C external/backports-wireless KLIB=$(KERNEL_SRC) KLIB_BUILD=$(KERNEL_OUT) ARCH=$(TARGET_ARCH) $(ARM_CROSS_COMPILE)
+	cp `find external/backports-wireless -name *.ko` $(KERNEL_MODULES_OUT)/
+	arm-eabi-strip --strip-debug `find $(KERNEL_MODULES_OUT) -name *.ko`
+	$(MAKE) -C external/backports-wireless clean
+
+TARGET_KERNEL_MODULES := KERNEL_WIFI_MODULES
 
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/hp/tenderloin/recovery/recovery_ui.c
 BOARD_CUSTOM_GRAPHICS:= ../../../device/hp/tenderloin/recovery/graphics.c

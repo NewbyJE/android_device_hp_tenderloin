@@ -36,6 +36,7 @@ bin
 etc
 etc/firmware
 lib
+lib/hw
 lib/egl
 "
 
