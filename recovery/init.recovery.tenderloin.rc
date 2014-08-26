@@ -45,6 +45,3 @@ on property:recovery.perf.mode=0
 # Always start adbd on userdebug and eng builds
 on property:ro.debuggable=1
     setprop service.adb.root 1
-
-service tsdriver /sbin/ts_srv
-    critical

@@ -36,9 +36,9 @@ PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/boot/moboot.default:moboot.default
 
 # Bluetooth
-PRODUCT_COPY_FILES += \
-	  $(LOCAL_PATH)/bluetooth/bt_vendor.conf:/system/etc/bluetooth/bt_vendor.conf \
-	  $(LOCAL_PATH)/bluetooth/bluecore6.psr:/system/etc/bluetooth/bluecore6.psr
+#PRODUCT_COPY_FILES += \
+#	  $(LOCAL_PATH)/bluetooth/bt_vendor.conf:/system/etc/bluetooth/bt_vendor.conf \
+#	  $(LOCAL_PATH)/bluetooth/bluecore6.psr:/system/etc/bluetooth/bluecore6.psr
 
 # Dualboot Magic
 PRODUCT_COPY_FILES += \
@@ -206,10 +206,6 @@ PRODUCT_PACKAGES += \
     VisualizationWallpapers \
     librs_jni
 
-# Recovery
-PRODUCT_COPY_FILES += \
-    device/hp/tenderloin/recovery/sbin/ts_srv:recovery/root/sbin/ts_srv
-
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -222,6 +218,3 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
 
 $(call inherit-product-if-exists, vendor/hp/tenderloin/tenderloin-vendor.mk)
-
-# include milaq vendor stuff
-$(call inherit-product-if-exists, vendor/mlq/mlq.mk)

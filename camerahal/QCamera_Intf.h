@@ -167,17 +167,7 @@ typedef struct {
   uint32_t sensor_mount_angle;
   //uint32_t sensor_Orientation;
   //struct fih_parameters_data parameters_data;
-} qcamera_info_t;
-
-
-/**
- *  The size of image for display.
- */
-typedef struct image_rect_struct
-{
-  uint32_t width;      /* Image width */
-  uint32_t height;     /* Image height */
-} image_rect_type;
+} camera_info_t;
 
 typedef struct {
   camera_mode_t mode;
