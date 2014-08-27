@@ -36,9 +36,9 @@ PRODUCT_COPY_FILES += \
     device/hp/tenderloin/prebuilt/boot/moboot.default:moboot.default
 
 # Bluetooth
-#PRODUCT_COPY_FILES += \
-#	  $(LOCAL_PATH)/bluetooth/bt_vendor.conf:/system/etc/bluetooth/bt_vendor.conf \
-#	  $(LOCAL_PATH)/bluetooth/bluecore6.psr:/system/etc/bluetooth/bluecore6.psr
+PRODUCT_COPY_FILES += \
+	  $(LOCAL_PATH)/bluetooth/bt_vendor.conf:/system/etc/bluetooth/bt_vendor.conf \
+	  $(LOCAL_PATH)/bluetooth/bluecore6.psr:/system/etc/bluetooth/bluecore6.psr
 
 # Dualboot Magic
 PRODUCT_COPY_FILES += \
@@ -70,8 +70,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8660 \
     memtrack.msm8660
 
-
-# QCOM Display Hal
+# QCOM Display
 PRODUCT_PACKAGES += \
     libgenlock \
     libmemalloc \
@@ -197,7 +196,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp,adb
+    persist.sys.usb.config=mtp
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
