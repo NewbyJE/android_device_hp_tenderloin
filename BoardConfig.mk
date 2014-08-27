@@ -106,7 +106,7 @@ TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := device/hp/tenderloin/releasetools/t
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/hp/tenderloin/releasetools/tenderloin_ota_from_target_files
 
 # Define kernel config for inline building
-TARGET_KERNEL_CONFIG := cyanogenmod_tenderloin_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_tenderloin_4g_defconfig
 TARGET_KERNEL_SOURCE := kernel/hp/tenderloin
 KERNEL_WIFI_MODULES:
 	$(MAKE) -C external/backports-wireless defconfig-ath6kl
