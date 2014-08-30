@@ -35,7 +35,7 @@
 
 extern "C" {
 #include <linux/android_pmem.h>
-#include <media/msm_camera.h>
+#include <media/msm_camera-tenderloin.h>
 #include "QCamera_Intf.h"
 }
 // Extra propriatary stuff (mostly from CM)
@@ -74,7 +74,7 @@ typedef uint32_t jpeg_event_t;
 #if 1
 typedef enum {
 	CAMERA_WB_MIN_MINUS_1,
-	CAMERA_WB_AUTO = 1,  /* This list must match aeecamera.h */
+	CAMERA_WB_AUTO = 1, /* This list must match aeecamera.h */
 	CAMERA_WB_CUSTOM,
 	CAMERA_WB_INCANDESCENT,
 	CAMERA_WB_FLUORESCENT,
