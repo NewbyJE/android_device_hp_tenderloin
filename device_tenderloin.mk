@@ -137,11 +137,11 @@ PRODUCT_PACKAGES += \
     gps.tenderloin \
     MbmService \
     libmbm-ril \
+    xmesg \
     Mms
 
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/aldtf.sh:system/xbin/aldtf.sh \
-    device/hp/tenderloin/xmesg:system/bin/xmesg \
     device/hp/tenderloin/pollerr.sh:system/bin/pollerr.sh \
     device/hp/tenderloin/gps.conf:system/etc/gps.conf
 
