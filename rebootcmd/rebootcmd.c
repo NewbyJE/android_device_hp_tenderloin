@@ -1,26 +1,15 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <cutils/properties.h>
-#include <android/log.h>
 
-#define ALOGD(...) __android_log_print(ANDROID_LOG_DEBUG, "rebootcmd: ", __VA_ARGS__)
+#define RUNCMD "/system/bin/moboot_control.sh"
 
 int main(int argc, char**argv, char *envp[])
 {
-	if(strcmp(argv[1], "recovery") == 0){
-		//returns 1 if error
-		ALOGD("Rebooting into recovery");
-		system("/system/bin/moboot_control.sh recovery");
-	} else {
-		if(strcmp(argv[1], "altos") == 0){
-			//returns 1 if error
-			ALOGD("Rebooting into WebOS");
-			system("/system/bin/moboot_control.sh altos");
-		}
-	}
+	char *newargv[] = { RUNCMD, argv[1], NULL };
+	setuid(0);
 
-	//Needed to allow the script to write to /boot/moboot.next
-	sleep(1);
+	execve(RUNCMD, newargv, envp);
+
 	return -1;
 }

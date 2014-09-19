@@ -36,9 +36,17 @@ if [ ! -d "$ROOT" ]; then
    exit 0
 fi
 
-cd $ROOT
+#### cd $ROOT
 echo  "Making $CPIO_TARGET..."
-find . |cpio -R 0:0 -H newc -o --quiet |gzip -9c > $OUT/$CPIO_TARGET
+#### find . |cpio -R 0:0 -H newc -o --quiet |gzip -9c > $OUT/$CPIO_TARGET
+if [ "$1" = "-r" ];
+then
+	${OUT}/../../../host/linux-x86/bin/mkbootfs $ROOT | \
+		xz -C crc32 -c >$OUT/$CPIO_TARGET
+else
+	${OUT}/../../../host/linux-x86/bin/mkbootfs $ROOT | \
+		gzip -9c >$OUT/$CPIO_TARGET
+fi
 echo  "Making $UBOOTED_RAMDISK..."
 $MKIMAGE -A ARM -T RAMDisk -C none -n Image -d $OUT/$CPIO_TARGET $OUT/$UBOOTED_RAMDISK
 echo  "Making $TARGET from kernel and $UBOOTED_RAMDISK..."

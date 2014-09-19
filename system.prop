@@ -3,9 +3,7 @@
 #
 #ro.sf.hwrotation=270
 
-ro.additionalmounts=/mnt/usbdisk
-
-ro.cwm.forbid_format=/boot
+ro.cwm.forbid_format=/boot,/storage/sdcard1
 
 wifi.interface=wlan0
 wifi.supplicant_scan_interval=45
@@ -20,6 +18,9 @@ debug.sf.hw=1
 debug.egl.hw=1
 debug.egl.recordable.rgba8888=1
 debug.composition.type=dyn
+
+# key repeat up/down, but also corrects non-repeat of select
+ro.cwm.enable_key_repeat=1
 
 # MBM ril
 mobiledata.interfaces=rmnet0
