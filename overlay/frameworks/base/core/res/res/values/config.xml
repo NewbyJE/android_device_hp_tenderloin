@@ -121,13 +121,13 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
+         <item>1</item>
+         <item>10</item>
          <item>50</item>
-         <item>100</item>
-         <item>175</item>
-         <item>225</item>
-         <item>300</item>
-         <item>400</item>
-         <item>500</item>
+         <item>200</item>
+         <item>1000</item>
+         <item>5000</item>
+         <item>15000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the
@@ -135,15 +135,32 @@
          should have size one greater than the size of the
          config_autoBrightnessLevels array. -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>21</item>
-        <item>41</item>
-        <item>75</item>
-        <item>100</item>
-        <item>150</item>
-        <item>200</item>
-        <item>225</item>
+        <item>0</item>
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>35</item>
+        <item>85</item>
+        <item>175</item>
         <item>255</item>
     </integer-array>
+
+    <!-- Minimum screen brightness setting allowed by the power manager.
+         The user is forbidden from setting the brightness below this level. -->
+    <integer name="config_screenBrightnessSettingMinimum">1</integer>
+
+    <!-- Maximum screen brightness allowed by the power manager.
+         The user is forbidden from setting the brightness above this level. -->
+    <integer name="config_screenBrightnessSettingMaximum">255</integer>
+
+    <!-- Default screen brightness setting.
+         Must be in the range specified by minimum and maximum. -->
+    <integer name="config_screenBrightnessSettingDefault">102</integer>
+
+    <!-- Screen brightness used to dim the screen when the user activity
+         timeout expires.  May be less than the minimum allowed brightness setting
+         that can be set by the user. -->
+    <integer name="config_screenBrightnessDim">1</integer>
 
     <!-- Array of output values for button backlight corresponding to the LUX values
          in the config_autoBrightnessLevels array.  This array should have size one greater
@@ -280,4 +297,9 @@
     -->
     <bool name="config_enableWifiDisplay">true</bool>
 
+	<!-- Enable WiFi Display for Chromecast/Miracast -->
+	<bool name="config_enableWifiDisplay">true</bool>
+
+    <!-- Base "touch slop" value used by ViewConfiguration as a movement threshold where scrolling should begin. -->
+    <dimen name="config_viewConfigurationTouchSlop">4dp</dimen>
 </resources>
