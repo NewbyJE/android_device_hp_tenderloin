@@ -129,6 +129,7 @@ PRODUCT_PACKAGES += \
     ts_srv \
     ts_srv_set \
     serial \
+	dosfsck \
     com.android.future.usb.accessory \
     rebootcmd
 
