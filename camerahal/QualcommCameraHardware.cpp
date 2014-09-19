@@ -3333,6 +3333,9 @@ void QualcommCameraHardware::release()
     ALOGV("release X: mCameraRunning = %d, mFrameThreadRunning = %d", mCameraRunning, mFrameThreadRunning);
     ALOGV("mVideoThreadRunning = %d, mSnapshotThreadRunning = %d, mJpegThreadRunning = %d", mVideoThreadRunning, mSnapshotThreadRunning, mJpegThreadRunning);
     ALOGV("camframe_timeout_flag = %d, mAutoFocusThreadRunning = %d", camframe_timeout_flag, mAutoFocusThreadRunning);
+
+    libmmcamera = NULL;
+    mMMCameraDLRef.clear();
 }
 
 QualcommCameraHardware::~QualcommCameraHardware()
@@ -3345,10 +3348,6 @@ QualcommCameraHardware::~QualcommCameraHardware()
         delete [] record_buffers_tracking_flag;
         record_buffers_tracking_flag = NULL;
     }
-
-    libmmcamera = NULL;
-    mMMCameraDLRef.clear();
-
     ALOGI("~QualcommCameraHardware X");
 }
 

@@ -68,7 +68,8 @@ PRODUCT_PACKAGES += \
     copybit.msm8660 \
     gralloc.msm8660 \
     hwcomposer.msm8660 \
-    memtrack.msm8660
+    memtrack.msm8660 \
+    camera.tenderloin
 
 # QCOM Display
 PRODUCT_PACKAGES += \
@@ -151,7 +152,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.tenderloin
+    Camera2
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
