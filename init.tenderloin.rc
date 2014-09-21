@@ -29,19 +29,25 @@ on init
     # remount /boot read-only
     mount ext3 /dev/block/mmcblk0p13 /boot remount ro wait noatime barrier=1
 
-	### START from grouper ###
+    # sdcard / sdcard0
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
 
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-
     # Support legacy paths
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+
+    # sdcard1
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /storage/sdcard1 0775 system system
+
+    # Storage paths
+	symlink /mnt/media_rw/sdcard1 /external_sd
+	symlink /mnt/media_rw/sdcard1 /mnt/external_sd
+    symlink /storage/sdcard1 /external_sd
+    symlink /storage/sdcard1 /mnt/external_sd
 
     # USB OTG support
     mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
@@ -49,17 +55,10 @@ on init
     symlink /storage/usbdisk /mnt/usbdisk
     symlink /mnt/usbdisk /usbdisk
 
-    # export SECONDARY_STORAGE /storage/usbdisk
-
-	### END from grouper ###
-
-    # sdcard1
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    mkdir /storage/sdcard1 0775 system system
-	# symlink /mnt/media_rw/sdcard1 /storage/sdcard1
-	symlink /mnt/media_rw/sdcard1 /external_sd
-	symlink /mnt/media_rw/sdcard1 /mnt/external_sd
-
+    # export values
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
     export SECONDARY_STORAGE /storage/sdcard1
 
 on fs
