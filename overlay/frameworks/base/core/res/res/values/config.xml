@@ -23,13 +23,6 @@
 
     <string name="config_datause_iface" translatable="false">rmnet0</string>
 
-    <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
-    <bool name="config_unplugTurnsOnScreen">true</bool>
-
-    <!-- If this is true, the screen will fade off. -->
-    <bool name="config_animateScreenLights">false</bool>
-
-
     <!-- An Array of "[Connection name],[ConnectivityManager.TYPE_xxxx],
          [associated radio-type],[priority],[restore-timer(ms)],[dependencyMet]  -->
     <!-- the 5th element "restore-timer" indicates the number of milliseconds to delay
@@ -55,7 +48,7 @@
          attributes.  This is used by the connectivity manager to decide which networks can coexist
          based on the hardware -->
     <!-- An Array of "[ConnectivityManager connectionType],
-                      [# simultaneous connection types]"  -->
+         [# simultaneous connection types]"  -->
     <string-array translatable="false" name="radioAttributes">
         <item>"1,1"</item>
         <item>"0,1"</item>
@@ -109,6 +102,9 @@
     <!-- Flag indicating whether we should enable the automatic brightness in Settings.
          config_hardware_automatic_brightness_available is not set, so we will use software implementation -->
     <bool name="config_automatic_brightness_available">true</bool>
+
+    <!-- If this is true, the screen will fade off. -->
+    <bool name="config_animateScreenLights">false</bool>
 
     <!-- Array of light sensor LUX values to define our levels for auto
          backlight brightness support. The N entries of this array define
@@ -227,6 +223,9 @@
                cell broadcasting sms, and MMS. -->
     <bool name="config_sms_capable">true</bool>
 
+    <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
+    <bool name="config_unplugTurnsOnScreen">true</bool>
+
     <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
          autodetected from the Configuration. -->
     <bool name="config_showNavigationBar">true</bool>
@@ -264,7 +263,6 @@
              4 - Menu
              8 - Assistant (search)
             16 - App switch
-            32 - Camera
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
     <integer name="config_deviceHardwareKeys">1</integer>
