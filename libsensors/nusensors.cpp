@@ -32,6 +32,7 @@
 #include "lsm303dlh_acc.h"
 #include "lsm303dlh_mag.h"
 #include "LightSensor.h"
+
 #include "MPLSensor.h"
 
 /*****************************************************************************/

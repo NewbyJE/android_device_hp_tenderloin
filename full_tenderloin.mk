@@ -48,10 +48,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/moboot_control.sh:system/bin/moboot_control.sh
 
-# media minor check boot script
-PRODUCT_COPY_FILES += \
-    device/hp/tenderloin/prebuilt/etc/init.d/10check_media_minor:system/etc/init.d/10check_media_minor
-
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \

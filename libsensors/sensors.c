@@ -50,7 +50,7 @@ static const struct sensor_t sSensorList[] = {
         { "MPL Temperature sensor",
                 "Invensense",
                 1, SENSORS_HANDLE_BASE+ID_T,
-                SENSOR_TYPE_AMBIENT_TEMPERATURE, 80.0f, 0.5f, 0.0f, 10000/*10ms*/, 0, 0, {} },
+                SENSOR_TYPE_AMBIENT_TEMPERATURE, 80.0f, 0.5f, 0.0f, 10000/*10ms*/, 0, 0, { } },
 };
 
 static int open_sensors(const struct hw_module_t* module, const char* name,

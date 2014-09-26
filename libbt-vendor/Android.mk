@@ -35,7 +35,7 @@ LOCAL_SRC_FILES := \
 LOCAL_C_INCLUDES += \
         $(LOCAL_PATH)/include \
         $(BDROID_DIR)/hci/include \
-	$(kernel_includes)
+        $(kernel_includes)
 
 LOCAL_SHARED_LIBRARIES := \
         libcutils
