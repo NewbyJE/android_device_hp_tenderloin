@@ -262,7 +262,7 @@ on init
     chmod 0644 /proc/cmdline 
 
 # Enable USB auto suspend for MBM devices
-write /sys/bus/usb/devices/1-1/power/autosuspend 2
+write /sys/bus/usb/devices/1-1/power/autosuspend 3
 write /sys/bus/usb/devices/1-1/power/control auto
 write /sys/bus/usb/devices/1-1/power/wakeup enabled
 chown system system /dev/cdc-wdm0

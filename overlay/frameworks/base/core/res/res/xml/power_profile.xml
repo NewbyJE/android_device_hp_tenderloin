@@ -28,12 +28,13 @@
     <item name="wifi.scan">220</item>
     <item name="dsp.audio">88</item> <!-- not used -->
     <item name="dsp.video">88</item> <!-- not used -->
-    <item name="radio.active">0</item>
-    <item name="radio.scanning">0</item>
-    <item name="gps.on">0</item>
+    <item name="radio.active">150</item>
+    <item name="radio.scanning">70</item>
+    <item name="gps.on">70</item>
     <item name="battery.capacity">6000</item>
     <array name="radio.on">
-        <value>0</value>
+        <value>3</value>
+        <value>3</value>
     </array>
     <array name="cpu.speeds">
         <value>192000</value>
@@ -54,11 +55,15 @@
         <value>1134000</value>
         <value>1188000</value>
         <value>1242000</value>
+        <value>1296000</value>
+        <value>1350000</value>
         <value>1404000</value>
+        <value>1458000</value>
         <value>1512000</value>
         <value>1620000</value>
         <value>1674000</value>
         <value>1728000</value>
+        <value>1782000</value>
     </array>
     <item name="cpu.idle">2.8</item>
     <item name="cpu.awake">10</item>
@@ -81,10 +86,13 @@
         <value>320</value>
         <value>335</value>
         <value>350</value>
+        <value>365</value>
+        <value>380</value>
         <value>395</value>
+        <value>410</value>
         <value>425</value>
         <value>455</value>
-        <value>470</value>
+        <value>485</value>
         <value>500</value>
     </array>
 </device>
