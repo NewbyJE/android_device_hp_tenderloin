@@ -1,7 +1,11 @@
 import init.tenderloin.usb.rc
 
 on early-init
+    write /sys/block/mmcblk0/queue/scheduler noop
     start serial
+
+    #set SELINUX to passive
+    setenforce 0
 
 on init
     # Enable LVM
@@ -48,7 +52,7 @@ on init
     symlink /storage/emulated/legacy /storage/sdcard0
 
     symlink /mnt/media_rw/sdcard1 /external_sd
-	symlink /mnt/media_rw/sdcard1 /mnt/external_sd
+    symlink /mnt/media_rw/sdcard1 /mnt/external_sd
     symlink /storage/sdcard1 /external_sd
     symlink /storage/sdcard1 /mnt/external_sd
 
