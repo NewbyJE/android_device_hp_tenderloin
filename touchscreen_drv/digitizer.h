@@ -67,3 +67,15 @@ void init_digitizer_fd(void);
 #ifndef FD_ZERO
 #define FD_ZERO(fdsetp) __FD_ZERO(fdsetp)
 #endif
+
+#ifdef TPTS_ALOG
+#define TSLOGD ALOGD
+#define TSLOGE ALOGE
+#define TSLOGV ALOGV
+#define TSLOGI ALOGI
+#else
+#define TSLOGD(...) do {} while (0)
+#define TSLOGE(...) do {} while (0)
+#define TSLOGV(...) do {} while (0)
+#define TSLOGI(...) do {} while (0)
+#endif
