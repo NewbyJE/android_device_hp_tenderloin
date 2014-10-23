@@ -2454,7 +2454,7 @@ int QualcommCameraHardware::allocate_ion_memory(int *main_ion_fd, struct ion_all
         ALOGE("ION map failed %s\n", strerror(errno));
         goto ION_MAP_FAILED;
     }
-    *memfd = ion_info_fd->fd; 
+    *memfd = ion_info_fd->fd;
     return 0;
 
 ION_MAP_FAILED:

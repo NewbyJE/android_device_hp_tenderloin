@@ -17,11 +17,9 @@
 ifeq ($(BOARD_HAVE_BLUETOOTH_HCI),true)
 
 LOCAL_PATH := $(call my-dir)
-kernel_includes += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 
 include $(CLEAR_VARS)
 
-LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 BDROID_DIR:= external/bluetooth/bluedroid
 
 LOCAL_SRC_FILES := \
@@ -34,8 +32,7 @@ LOCAL_SRC_FILES := \
 
 LOCAL_C_INCLUDES += \
         $(LOCAL_PATH)/include \
-        $(BDROID_DIR)/hci/include \
-        $(kernel_includes)
+        $(BDROID_DIR)/hci/include
 
 LOCAL_SHARED_LIBRARIES := \
         libcutils

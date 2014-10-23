@@ -253,7 +253,7 @@ static int path_apply(struct audio_route *ar, struct mixer_path *path)
 		}
 #else
 		for (k = 0; k < path->setting[i].ctl_vals; k++) {
-                 ar->mixer_state[j].new_value[k] = path->setting[i].value[k];
+        	ar->mixer_state[j].new_value[k] = path->setting[i].value[k];
 		}
 		ALOGV("mixer_set: '%s' %d,%d,%d\n",
 				mixer_ctl_get_name(ctl),

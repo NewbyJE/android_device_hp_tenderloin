@@ -293,13 +293,6 @@ static void do_in_standby(struct stream_in *in)
         }
         in->standby = true;
     }
-	if (out_standby_pend) {
-		struct stream_out *aout = adev->active_out;
-		ALOGV("%s: calling do_out_standby\n", __func__);
-        pthread_mutex_lock(&aout->lock);
-		do_out_standby(aout);
-        pthread_mutex_unlock(&aout->lock);
-	}
 }
 
 /* must be called with hw device and output stream mutexes locked */
@@ -333,7 +326,6 @@ static int start_output_stream(struct stream_out *out)
      * the most common rate, but group 2 is required for SCO.
      */
     if (adev->active_in) {
-        pthread_mutex_lock(&adev->active_in->lock);
 		struct stream_in *in = adev->active_in;
 		pthread_mutex_lock(&in->lock);
         if (((out->pcm_config->rate % 8000 == 0) &&
@@ -344,7 +336,7 @@ static int start_output_stream(struct stream_out *out)
         pthread_mutex_unlock(&in->lock);
     }
 
-    out->pcm = pcm_open(PCM_CARD, device, PCM_OUT | PCM_NORESTART, out->pcm_config);
+    out->pcm = pcm_open(PCM_CARD, device, PCM_OUT, out->pcm_config);
 
     if (out->pcm && !pcm_is_ready(out->pcm)) {
         ALOGE("pcm_open(out) failed: %s", pcm_get_error(out->pcm));
@@ -902,12 +894,20 @@ static int in_set_format(struct audio_stream *stream, audio_format_t format)
 static int in_standby(struct audio_stream *stream)
 {
     struct stream_in *in = (struct stream_in *)stream;
+    struct audio_device *adev = in->dev;
 
 	ALOGV("%s: CALLED\n", __func__);
     pthread_mutex_lock(&in->dev->lock);
     pthread_mutex_lock(&in->lock);
     do_in_standby(in);
     pthread_mutex_unlock(&in->lock);
+    if (out_standby_pend) {
+        struct stream_out *aout = adev->active_out;
+        ALOGV("%s: calling do_out_standby\n", __func__);
+        pthread_mutex_lock(&aout->lock);
+        do_out_standby(aout);
+        pthread_mutex_unlock(&aout->lock);
+    }
     pthread_mutex_unlock(&in->dev->lock);
 
     return 0;
@@ -1027,9 +1027,17 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
         memset(buffer, 0, bytes);
 
 exit:
-    if (ret < 0)
+    if (ret < 0) {
+#if 0
         usleep(bytes * 1000000 / audio_stream_frame_size(&stream->common) /
                in_get_sample_rate(&stream->common));
+#else
+        pthread_mutex_lock(&in->dev->lock);
+        ALOGV("%s: ret=%d restarting\n", __func__, ret);
+        do_in_standby(in);
+        pthread_mutex_unlock(&in->dev->lock);
+#endif
+    }
 
     pthread_mutex_unlock(&in->lock);
     return bytes;
