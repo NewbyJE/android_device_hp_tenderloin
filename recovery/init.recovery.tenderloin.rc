@@ -1,5 +1,9 @@
 on init
+	# for TWRP begin
+	export PATH /sbin
+	export LD_LIBRARY_PATH .:/sbin
 
+    mkdir /external_sd
     mkdir /mnt 0775 root system
 
     # We need to set LVM_SYSTEM_DIR for lvm to work and it does not work
@@ -15,29 +19,42 @@ on init
     exec /mnt/bin/sh -c "LVM_SYSTEM_DIR=/mnt/etc/lvm /mnt/usr/sbin/lvm.static vgchange -ay"
 
     # remove all the lvm stuff as well as the moboot nextboot instruction
-    exec /sbin/rm -rf /dev/mmcblk0p14 /lib /var /mnt/moboot.next
-    exec /sbin/umount /mnt
+    exec /mnt/bin/sh -c "LD_LIBRARY_PATH=/sbin /sbin/rm -rf /dev/mmcblk0p14 /lib /var /mnt/moboot.next"
+    exec /mnt/bin/sh -c "LD_LIBRARY_PATH=/sbin /sbin/umount /mnt"
 
-on boot
-    # enable power modes and set the cpufreq sampling rates
+    # increase dirty_writeback_interval
+    write /proc/sys/vm/dirty_writeback_centisecs 60000
+    write /proc/sys/vm/dirty_expire_centisecs 60000
+
+    # Enable power collapse where always safe
+    write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu1/power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled 1
+    write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/rpm_resources/enable_low_power/vdd_dig 2
+    write /sys/module/rpm_resources/enable_low_power/vdd_mem 2
     write /sys/module/rpm_resources/enable_low_power/L2_cache 1
     write /sys/module/rpm_resources/enable_low_power/pxo 1
-    write /sys/module/rpm_resources/enable_low_power/vdd_dig 1
-    write /sys/module/rpm_resources/enable_low_power/vdd_mem 1
-    write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
-    write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 384000
-    write /sys/devices/system/cpu/cpu1/online 0
-    setprop recovery.perf.mode 0
+    write /sys/module/rpm_resources/enable_low_power/rpm_cpu 1
 
-on property:recovery.perf.mode=1
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "performance"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "performance"
+	# enable core1
+	write /sys/devices/system/cpu/cpu1/online 1
+	# "disable" mpdec (really special mode)
+    write /sys/kernel/msm_mpdecision/conf/enabled 0
 
-on property:recovery.perf.mode=0
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpu1/online 0
+on boot
+	ifup lo
+	hostname localhost
+	domainname localdomain
+	class_start default
+
+service tsdriver /sbin/ts_srv_static
+	critical
+
+# Always start adbd on userdebug and eng builds
+on property:ro.debuggable=1
+    setprop service.adb.root 1

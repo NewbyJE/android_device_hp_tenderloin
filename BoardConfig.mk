@@ -121,13 +121,23 @@ KERNEL_WIFI_MODULES:
 
 TARGET_KERNEL_MODULES := KERNEL_WIFI_MODULES
 
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/hp/tenderloin/recovery/recovery_ui.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/hp/tenderloin/recovery/recovery_keys.c
+ifeq ($(RECOVERY_VARIANT),)
 BOARD_CUSTOM_GRAPHICS:= ../../../device/hp/tenderloin/recovery/graphics.c
+endif
+ifeq ($(RECOVERY_VARIANT),philz)
+TARGET_RECOVERY_LCD_BACKLIGHT_PATH := "\"/sys/class/leds/lcd-backlight/brightness\""
+endif
 RECOVERY_FSTAB_VERSION=2
 TARGET_RECOVERY_FSTAB = device/hp/tenderloin/recovery/recovery.fstab
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
+
+# recovery name
+ifneq ($(RECOVERY_VARIANT),philz)
+RECOVERY_NAME := CWM-based Recovery (jcsullins-datamedia-`date "+%Y%m%d"`)
+endif
 
 # partition sizes
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -150,3 +160,45 @@ BOARD_USES_CUSTOM_FSCK_MSDOS := true
 
 #
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK=1
+
+#### TWRP ####
+# start old stuff
+# TARGET_RECOVERY_INITRC := device/hp/tenderloin/recovery/init.twrp.rc
+DEVICE_RESOLUTION := 1024x768
+TW_CUSTOM_POWER_BUTTON := 107
+TW_FLASH_FROM_STORAGE := true
+# end of old stuff
+# TARGET_RECOVERY_INITRC := device/hp/tenderloin/recovery/init.twrp.rc
+RECOVERY_SDCARD_ON_DATA := true
+# RECOVERY_GRAPHICS_USE_LINELENGTH := true
+BOARD_HAS_NO_REAL_SDCARD := true
+TW_INTERNAL_STORAGE_PATH := "/data/media"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "/external_sd"
+TW_CUSTOM_POWER_BUTTON := 102
+TW_NO_REBOOT_BOOTLOADER := true
+TW_NO_REBOOT_RECOVERY := true
+# TW_NO_USB_STORAGE := true
+# RECOVERY_TOUCHSCREEN_SWAP_XY := true
+# RECOVERY_TOUCHSCREEN_FLIP_X := true
+# RECOVERY_TOUCHSCREEN_FLIP_Y := true
+# TW_DEFAULT_EXTERNAL_STORAGE := true
+# BOARD_HAS_FLIPPED_SCREEN := true
+# TWRP_EVENT_LOGGING := true
+BOARD_UMS_LUNFILE := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+
+TW_NO_SCREEN_BLANK := true
+TW_BRIGHTNESS_PATH  := /sys/class/leds/lcd-backlight/brightness
+TW_MAX_BRIGHTNESS := 254
+
+# TWRP crypto
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_JB_CRYPTO := true
+TW_CRYPTO_FS_TYPE := ext4
+TW_CRYPTO_REAL_BLKDEV := /dev/store/cm-data
+TW_CRYPTO_MNT_POINT := /data
+TW_CRYPTO_FS_OPTIONS := noatime,nosuid,nodev,barrier=0,noauto_da_alloc
+TW_CRYPTO_FS_FLAGS := wait,check,encryptable=/dev/block/mmcblk0p10
+TW_CRYPTO_KEY_LOC := /dev/block/mmcblk0p10
+

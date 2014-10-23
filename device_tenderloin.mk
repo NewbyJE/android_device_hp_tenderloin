@@ -22,6 +22,10 @@ PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG := xlarge mdpi hdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 
+# TWRP FSTAB
+PRODUCT_COPY_FILES += \
+	device/hp/tenderloin/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
+
 PRODUCT_COPY_FILES += \
     device/hp/tenderloin/init.tenderloin.usb.rc:root/init.tenderloin.usb.rc \
     device/hp/tenderloin/init.tenderloin.rc:root/init.tenderloin.rc \
@@ -137,6 +141,10 @@ PRODUCT_PACKAGES += \
 	dosfsck \
     com.android.future.usb.accessory \
     rebootcmd
+
+# for recovery ts_srv
+PRODUCT_PACKAGES += \
+    ts_srv_static
 
 # MBM
 PRODUCT_PACKAGES += \
