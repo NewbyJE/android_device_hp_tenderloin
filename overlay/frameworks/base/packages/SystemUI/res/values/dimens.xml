@@ -21,3 +21,4 @@
     <dimen name="fling_gesture_max_x_velocity">1500dp</dimen>
     <dimen name="fling_gesture_max_output_velocity">6000dp</dimen>
 </resources>
+
