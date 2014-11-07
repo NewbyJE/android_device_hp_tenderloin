@@ -21,7 +21,7 @@
      for different hardware and product builds. -->
 <resources>
 
-    <string name="config_datause_iface" translatable="false">rmnet0</string>
+    <string name="config_datause_iface" translatable="false">wwan0</string>
 
     <!-- An Array of "[Connection name],[ConnectivityManager.TYPE_xxxx],
          [associated radio-type],[priority],[restore-timer(ms)],[dependencyMet]  -->

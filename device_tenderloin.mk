@@ -146,11 +146,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     ts_srv_static
 
-# MBM
+# Sierra
 PRODUCT_PACKAGES += \
+    SierraDMLog \
+    swifwdnld \
+    swisdk \
+    libsierraat-ril \
+    libswims \
+    libswisdkapi \
     gps.tenderloin \
-    MbmService \
-    libmbm-ril \
     xmesg \
     Mms
 

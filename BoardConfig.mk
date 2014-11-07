@@ -54,12 +54,12 @@ BOARD_HAVE_BLUETOOTH_HCI := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/hp/tenderloin/bluetooth
 BLUETOOTH_HCIATTACH_USING_PROPERTY = true
 
-# MBM support
-BOARD_USES_MBM_RIL := true
-BOARD_USES_MBM_GPS := true
+# Sierra support
 BOARD_GPS_LIBRARIES := gps.$(TARGET_BOOTLOADER_BOARD_NAME)
 USE_QEMU_GPS_HARDWARE := false
-# MBM RIL does not currently support CELL_INFO_LIST commands
+BOARD_USES_MBM_RIL := true
+BOARD_USES_MBM_GPS := true
+# RIL does not currently support CELL_INFO_LIST commands
 RIL_NO_CELL_INFO_LIST := true
 
 # Define egl.cfg location
