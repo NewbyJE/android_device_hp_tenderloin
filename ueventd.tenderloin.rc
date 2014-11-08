@@ -49,9 +49,6 @@
 /dev/mpu                  0660   system     system
 /dev/mpuirq               0660   system     system
 
-# MBM devices
-/dev/ttyACM0            0660    radio       radio
-/dev/ttyACM1            0660    radio       radio
-/dev/ttyACM2            0660    system      system
-/dev/cdc-wdm0           0660    system      system
-/dev/cdc-wdm1           0660    system      system
+# Sierra devices
+/dev/ttyUSB*              0660   radio      radio
+/dev/qcqmi*               0660   radio      radio

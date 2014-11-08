@@ -124,7 +124,6 @@ on boot
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
 
-
     # bluetooth power up/down interface
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
@@ -185,6 +184,15 @@ on boot
     insmod /system/lib/modules/compat.ko
     insmod /system/lib/modules/cfg80211.ko
 
+    # Sierra
+    chmod 0755 /system/bin/slqssdk
+    chmod 0755 /system/bin/init.dhcpcd
+    chmod 0755 /system/bin/init.ril-daemon
+    # device driver
+    insmod /system/lib/modules/sierra.ko
+    insmod /system/lib/modules/sierra_net.ko
+    insmod /system/lib/modules/GobiNet.ko
+
     # change permissions for i2c-2 device
 	chmod 0660 /dev/i2c-2
 	chown media media /dev/i2c-2
@@ -216,6 +224,14 @@ service wpa_supplicant /system/bin/wpa_supplicant \
 
 service dhcpcd_wlan0 /system/bin/dhcpcd -aABDKL
     class main
+    disabled
+    oneshot
+
+# define service of sierra_dhcpcd
+service sierra_dhcpcd /system/bin/init.dhcpcd
+    class main
+    user root
+    group radio cache inet misc
     disabled
     oneshot
 
@@ -252,8 +268,3 @@ service serial /sbin/serial
 # on property:init.svc.bootanim=stopped
     # start mpdecision
     #start thermald
-
-# Sierra
-on init
-    chmod 0755 /system/bin/slqssdk
-    chmod 0755 /system/bin/init.dhcpcd
