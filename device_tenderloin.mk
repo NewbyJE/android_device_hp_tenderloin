@@ -159,6 +159,9 @@ PRODUCT_PACKAGES += \
     Mms
 
 PRODUCT_COPY_FILES += \
+    hardware/sierra/prebuilt/system/bin/init.dhcpcd:system/bin/init.dhcpcd
+
+PRODUCT_COPY_FILES += \
     device/hp/tenderloin/aldtf.sh:system/xbin/aldtf.sh \
     device/hp/tenderloin/pollerr.sh:system/bin/pollerr.sh \
     device/hp/tenderloin/gps.conf:system/etc/gps.conf
