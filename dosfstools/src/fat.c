@@ -299,7 +299,7 @@ void fix_bad(DOS_FS * fs)
 {
     unsigned long i;
 
-    if (verbose)
+    if (do_verbose)
 	printf("Checking for bad clusters.\n");
     for (i = 2; i < fs->clusters + 2; i++) {
 	FAT_ENTRY curEntry;
@@ -318,7 +318,7 @@ void reclaim_free(DOS_FS * fs)
     int reclaimed;
     unsigned long i;
 
-    if (verbose)
+    if (do_verbose)
 	printf("Checking for unused clusters.\n");
     reclaimed = 0;
     for (i = 2; i < fs->clusters + 2; i++) {
@@ -404,7 +404,7 @@ void reclaim_file(DOS_FS * fs)
     unsigned long *num_refs = NULL;	/* Only for orphaned clusters */
     unsigned long total_num_clusters;
 
-    if (verbose)
+    if (do_verbose)
 	printf("Reclaiming unconnected clusters.\n");
 
     total_num_clusters = fs->clusters + 2UL;
@@ -511,7 +511,7 @@ unsigned long update_free(DOS_FS * fs)
     if (!fs->fsinfo_start)
 	return free;
 
-    if (verbose)
+    if (do_verbose)
 	printf("Checking free cluster summary.\n");
     if (fs->free_clusters != 0xFFFFFFFF) {
 	if (free != fs->free_clusters) {

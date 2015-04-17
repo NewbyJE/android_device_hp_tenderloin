@@ -40,7 +40,7 @@
 #include "file.h"
 #include "check.h"
 
-int interactive = 0, rw = 0, list = 0, test = 0, verbose = 0, write_immed = 0;
+int interactive = 0, rw = 0, do_list = 0, test = 0, do_verbose = 0, write_immed = 0;
 int atari_format = 0;
 unsigned n_files = 0;
 void *mem_queue = NULL;
@@ -136,7 +136,7 @@ int fsck_msdos_main(int argc, char **argv)
 	    salvage_files = 1;
 	    break;
 	case 'l':
-	    list = 1;
+	    do_list = 1;
 	    break;
 	case 'n':
 	    rw = 0;
@@ -153,7 +153,7 @@ int fsck_msdos_main(int argc, char **argv)
 	    file_add(optarg, fdt_undelete);
 	    break;
 	case 'v':
-	    verbose = 1;
+	    do_verbose = 1;
 	    printf("dosfsck " VERSION " (" VERSION_DATE ")\n");
 	    break;
 	case 'V':

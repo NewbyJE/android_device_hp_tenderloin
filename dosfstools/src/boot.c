@@ -318,7 +318,7 @@ void read_boot(DOS_FS * fs)
     fs->nfats = b.fats;
     sectors = GET_UNALIGNED_W(b.sectors);
     total_sectors = sectors ? sectors : CF_LE_L(b.total_sect);
-    if (verbose)
+    if (do_verbose)
 	printf("Checking we can access the last sector of the filesystem\n");
     /* Can't access last odd sector anyway, so round down */
     fs_test((loff_t) ((total_sectors & ~1) - 1) * (loff_t) logical_sector_size,
@@ -424,7 +424,7 @@ void read_boot(DOS_FS * fs)
     if (!atari_format && (!b.secs_track || !b.heads))
 	die("Invalid disk format in boot sector.");
 #endif
-    if (verbose)
+    if (do_verbose)
 	dump_boot(fs, &b, logical_sector_size);
 }
 

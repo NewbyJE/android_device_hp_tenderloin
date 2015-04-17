@@ -278,7 +278,7 @@ static char *program_name = "mkdosfs";	/* Name of the program */
 static char *device_name = NULL;	/* Name of the device on which to create the filesystem */
 static int atari_format = 0;	/* Use Atari variation of MS-DOS FS format */
 static int check = FALSE;	/* Default to no readablity checking */
-static int verbose = 0;		/* Default to verbose mode off */
+static int do_verbose = 0;		/* Default to verbose mode off */
 static long volume_id;		/* Volume ID number */
 static time_t create_time;	/* Creation time */
 static struct timeval create_timeval;	/* Creation time */
@@ -434,12 +434,12 @@ static void check_blocks(void)
     int i;
     static char blkbuf[BLOCK_SIZE * TEST_BUFFER_BLOCKS];
 
-    if (verbose) {
+    if (do_verbose) {
 	printf("Searching for bad blocks ");
 	fflush(stdout);
     }
     currently_testing = 0;
-    if (verbose) {
+    if (do_verbose) {
 	signal(SIGALRM, alarm_intr);
 	alarm(5);
     }
@@ -463,7 +463,7 @@ static void check_blocks(void)
 	currently_testing++;
     }
 
-    if (verbose)
+    if (do_verbose)
 	printf("\n");
 
     if (badblocks)
@@ -713,7 +713,7 @@ floppy_default:
 def_hd_params:
 	bs.media = (char)0xf8;	/* Set up the media descriptor for a hard drive */
 	if (!size_fat && blocks * SECTORS_PER_BLOCK > 1064960) {
-	    if (verbose)
+	    if (do_verbose)
 		printf("Auto-selecting FAT32 for large filesystem\n");
 	    size_fat = 32;
 	}
@@ -814,7 +814,7 @@ static void setup_tables(void)
     } else {
 	memcpy(bs.boot_jump, dummy_boot_jump_m68k, 2);
     }
-    if (verbose >= 2)
+    if (do_verbose >= 2)
 	printf("Boot jump code is %02x %02x\n",
 	       bs.boot_jump[0], bs.boot_jump[1]);
 
@@ -825,7 +825,7 @@ static void setup_tables(void)
 	    die("On FAT32 at least 2 reserved sectors are needed.");
     }
     bs.reserved = CT_LE_W(reserved_sectors);
-    if (verbose >= 2)
+    if (do_verbose >= 2)
 	printf("Using %d reserved sectors\n", reserved_sectors);
     bs.fats = (char)nr_fats;
     if (!atari_format || size_fat == 32)
@@ -854,7 +854,7 @@ static void setup_tables(void)
 	 * sectors, i.e. floppy size), don't align the data structures.
 	 */
 	if (num_sectors <= 8192) {
-	    if (align_structures && verbose >= 2)
+	    if (align_structures && do_verbose >= 2)
 		printf("Disabling alignment due to tiny filesystem\n");
 
 	    align_structures = FALSE;
@@ -872,7 +872,7 @@ static void setup_tables(void)
 	    fatdata1216 = fatdata32
 		- align_object(root_dir_sectors, bs.cluster_size);
 
-	    if (verbose >= 2)
+	    if (do_verbose >= 2)
 		printf("Trying with %d sectors/cluster:\n", bs.cluster_size);
 
 	    /* The factor 2 below avoids cut-off errors for nr_fats == 1.
@@ -888,12 +888,12 @@ static void setup_tables(void)
 	    maxclust12 = (fatlength12 * 2 * sector_size) / 3;
 	    if (maxclust12 > MAX_CLUST_12)
 		maxclust12 = MAX_CLUST_12;
-	    if (verbose >= 2)
+	    if (do_verbose >= 2)
 		printf("FAT12: #clu=%u, fatlen=%u, maxclu=%u, limit=%u\n",
 		       clust12, fatlength12, maxclust12, MAX_CLUST_12);
 	    if (clust12 > maxclust12 - 2) {
 		clust12 = 0;
-		if (verbose >= 2)
+		if (do_verbose >= 2)
 		    printf("FAT12: too much clusters\n");
 	    }
 
@@ -908,11 +908,11 @@ static void setup_tables(void)
 	    maxclust16 = (fatlength16 * sector_size) / 2;
 	    if (maxclust16 > MAX_CLUST_16)
 		maxclust16 = MAX_CLUST_16;
-	    if (verbose >= 2)
+	    if (do_verbose >= 2)
 		printf("FAT16: #clu=%u, fatlen=%u, maxclu=%u, limit=%u\n",
 		       clust16, fatlength16, maxclust16, MAX_CLUST_16);
 	    if (clust16 > maxclust16 - 2) {
-		if (verbose >= 2)
+		if (do_verbose >= 2)
 		    printf("FAT16: too much clusters\n");
 		clust16 = 0;
 	    }
@@ -920,7 +920,7 @@ static void setup_tables(void)
 	     * 12 bit FAT. */
 	    if (clust16 < FAT12_THRESHOLD
 		&& !(size_fat_by_user && size_fat == 16)) {
-		if (verbose >= 2)
+		if (do_verbose >= 2)
 		    printf(clust16 < FAT12_THRESHOLD ?
 			   "FAT16: would be misdetected as FAT12\n" :
 			   "FAT16: too much clusters\n");
@@ -941,15 +941,15 @@ static void setup_tables(void)
 	    if (clust32 && clust32 < MIN_CLUST_32
 		&& !(size_fat_by_user && size_fat == 32)) {
 		clust32 = 0;
-		if (verbose >= 2)
+		if (do_verbose >= 2)
 		    printf("FAT32: not enough clusters (%d)\n", MIN_CLUST_32);
 	    }
-	    if (verbose >= 2)
+	    if (do_verbose >= 2)
 		printf("FAT32: #clu=%u, fatlen=%u, maxclu=%u, limit=%u\n",
 		       clust32, fatlength32, maxclust32, MAX_CLUST_32);
 	    if (clust32 > maxclust32) {
 		clust32 = 0;
-		if (verbose >= 2)
+		if (do_verbose >= 2)
 		    printf("FAT32: too much clusters\n");
 	    }
 
@@ -965,7 +965,7 @@ static void setup_tables(void)
 	 * FAT32 is (not yet) choosen automatically */
 	if (!size_fat) {
 	    size_fat = (clust16 > clust12) ? 16 : 12;
-	    if (verbose >= 2)
+	    if (do_verbose >= 2)
 		printf("Choosing %d bits for FAT\n", size_fat);
 	}
 
@@ -1037,7 +1037,7 @@ static void setup_tables(void)
 	if (!size_fat)
 	    size_fat = (num_sectors == 1440 || num_sectors == 2400 ||
 			num_sectors == 2880 || num_sectors == 5760) ? 12 : 16;
-	if (verbose >= 2)
+	if (do_verbose >= 2)
 	    printf("Choosing %d bits for FAT\n", size_fat);
 
 	/* Atari format: cluster size should be 2, except explicitly requested by
@@ -1051,7 +1051,7 @@ static void setup_tables(void)
 		sector_size <<= 1;
 	    }
 	}
-	if (verbose >= 2)
+	if (do_verbose >= 2)
 	    printf("Sector size must be %d to have less than %d log. sectors\n",
 		   sector_size, GEMDOS_MAX_SECTORS);
 
@@ -1075,7 +1075,7 @@ static void setup_tables(void)
 	     * not really present cluster. */
 	    clusters = (fatdata - nr_fats * fat_length) / bs.cluster_size;
 	    maxclust = (fat_length * sector_size * 8) / size_fat;
-	    if (verbose >= 2)
+	    if (do_verbose >= 2)
 		printf("ss=%d: #clu=%d, fat_len=%d, maxclu=%d\n",
 		       sector_size, clusters, fat_length, maxclust);
 
@@ -1085,7 +1085,7 @@ static void setup_tables(void)
 		(size_fat == 32 ? MAX_CLUST_32 : (1 << size_fat) - 0x10)
 		&& clusters <= maxclust - 2)
 		break;
-	    if (verbose >= 2)
+	    if (do_verbose >= 2)
 		printf(clusters > maxclust - 2 ?
 		       "Too many clusters\n" : "FAT too big\n");
 
@@ -1131,7 +1131,7 @@ static void setup_tables(void)
 	    else if (backup_boot >= reserved_sectors)
 		die("Backup boot sector must be a reserved sector");
 	}
-	if (verbose >= 2)
+	if (do_verbose >= 2)
 	    printf("Using sector %d as backup boot sector (0 = none)\n",
 		   backup_boot);
 	bs.fat32.backup_boot = CT_LE_W(backup_boot);
@@ -1176,7 +1176,7 @@ static void setup_tables(void)
     if (blocks < start_data_block + 32)	/* Arbitrary undersize file system! */
 	die("Too few blocks for viable file system");
 
-    if (verbose) {
+    if (do_verbose) {
 	printf("%s has %d head%s and %d sector%s per track,\n",
 	       device_name, CF_LE_W(bs.heads),
 	       (CF_LE_W(bs.heads) != 1) ? "s" : "", CF_LE_W(bs.secs_track),
@@ -1611,7 +1611,7 @@ int main(int argc, char **argv)
 	    break;
 
 	case 'v':		/* v : Verbose execution */
-	    ++verbose;
+	    ++do_verbose;
 	    break;
 
 	default:

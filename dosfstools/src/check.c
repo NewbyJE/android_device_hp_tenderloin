@@ -954,7 +954,7 @@ static void add_file(DOS_FS * fs, DOS_FILE *** chain, DOS_FILE * parent,
 	undelete(fs, new);
     **chain = new;
     *chain = &new->next;
-    if (list) {
+    if (do_list) {
 	printf("Checking file %s", path_name(new));
 	if (new->lfn)
 	    printf(" (%s)", file_name(new->dir_ent.name));	/* (8.3) */
