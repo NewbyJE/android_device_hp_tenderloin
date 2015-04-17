@@ -24,4 +24,8 @@
          Setting to false will disable Home button Wake support -->
     <bool name="config_show_homeWake">true</bool>
 
+    <!-- Volume Button Rotation -->
+    <integer name="config_volumeRotationTable">1</integer>
+    <integer name="config_volumeRotationOffset">1</integer>
+
 </resources>

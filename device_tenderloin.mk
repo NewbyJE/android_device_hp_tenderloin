@@ -113,6 +113,14 @@ PRODUCT_PACKAGES += \
     tinyplay \
     tinycap
 
+# Audio (more)
+PRODUCT_PACKAGES += \
+	audio.usb.default
+
+# USB
+PRODUCT_PACKAGES += \
+    com.android.future.usb.accessory
+
 # Chromecast mirroring support
 PRODUCT_PACKAGES += \
 	audio.r_submix.default
@@ -131,6 +139,8 @@ PRODUCT_COPY_FILES += \
 
 # Sensors, misc
 PRODUCT_PACKAGES += \
+    hostapd.conf \
+    udhcpd.conf \
     wpa_supplicant.conf \
     power.tenderloin \
     sensors.tenderloin \

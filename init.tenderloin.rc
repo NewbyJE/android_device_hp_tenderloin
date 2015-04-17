@@ -1,7 +1,6 @@
 import init.tenderloin.usb.rc
 
 on early-init
-    write /sys/block/mmcblk0/queue/scheduler noop
     start serial
 
     #set SELINUX to passive
@@ -201,7 +200,7 @@ service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk
     disabled
 
 service wpa_supplicant /system/bin/wpa_supplicant \
-	-iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
+	-dd -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
 	-I/system/etc/wifi/wpa_supplicant_overlay.conf \
 	-O/data/misc/wifi/sockets \
 	-e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
@@ -220,6 +219,11 @@ service dhcpcd_wlan0 /system/bin/dhcpcd -aABDKL
     oneshot
 
 service iprenew_wlan0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
     class main
     disabled
     oneshot

@@ -68,8 +68,9 @@ BOARD_EGL_CFG := device/hp/tenderloin/configs/egl.cfg
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_USES_QCOM_BSP := true
-TARGET_QCOM_MEDIA_VARIANT := caf
+TARGET_QCOM_AUDIO_VARIANT := caf
 TARGET_QCOM_DISPLAY_VARIANT := caf
+TARGET_QCOM_MEDIA_VARIANT := caf
 
 # QCOM HAL
 USE_OPENGL_RENDERER := true
@@ -153,7 +154,6 @@ BOARD_HARDWARE_CLASS := device/hp/tenderloin/cmhw/
 # Multiboot stuff
 TARGET_RECOVERY_PRE_COMMAND := "/system/bin/rebootcmd"
 TARGET_RECOVERY_NO_RAINBOWS := true
-TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
 
 # use dosfsck from dosfstools
 BOARD_USES_CUSTOM_FSCK_MSDOS := true
