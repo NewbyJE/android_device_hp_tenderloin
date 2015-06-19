@@ -1,6 +1,8 @@
-/dev/block/mmcblk0p13           /boot            ext3        defaults        defaults
-/dev/store/cm-system            /system          ext4        defaults        defaults
-/dev/store/cm-data              /data            ext4        defaults        defaults
-/dev/store/cm-cache             /cache           ext4        defaults        defaults
-/devices/virtual/block/dm-6                 auto             vfat     defaults                                              voldmanaged=sdcard1:auto,nonremovable,noemulatedsd
-/devices/platform/msm_hsusb_host.0/usb    auto               auto     defaults                                              voldmanaged=usbdisk:auto
+/dev/block/mmcblk0p13                  /boot            ext3        defaults        defaults
+/dev/store/cm-system                   /system          ext4        defaults        defaults
+/dev/store/cm-data                     /data            ext4        defaults        defaults
+/dev/store/cm-data                     /data            f2fs        defaults        defaults
+/dev/store/cm-cache                    /cache           ext4        defaults        defaults
+/dev/store/cm-cache                    /cache           f2fs        defaults        defaults
+/devices/virtual/block/dm-6            auto             vfat        defaults        voldmanaged=sdcard1:auto,nonremovable,noemulatedsd
+/devices/platform/msm_hsusb_host.0/usb auto             auto        defaults        voldmanaged=usbdisk:auto
